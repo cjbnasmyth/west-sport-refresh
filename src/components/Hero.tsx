@@ -1,61 +1,42 @@
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import racingCarImage from "@/assets/racing-car.jpg";
+import footballImage from "@/assets/football.webp";
 
 const Hero = () => {
   return (
-    <section id="home" className="pt-32 pb-20 lg:pt-40 lg:pb-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-background">
-        <div className="absolute inset-0 opacity-20">
-          <img 
-            src={racingCarImage} 
-            alt="Sports action" 
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/90 to-background"></div>
-      </div>
-      
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-block mb-6 px-4 py-2 bg-accent/10 rounded-full">
-            <span className="text-accent font-semibold text-sm">Sports Marketing Excellence</span>
-          </div>
-          
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
-            Elevate Your
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-              Sports Brand
-            </span>
+    <section id="home" className="pt-32 pb-20 lg:pt-40 lg:pb-32 bg-background relative overflow-visible">
+      <div className="container mx-auto px-4 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          {/* Main Heading */}
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-serif font-bold text-foreground mb-16 text-center leading-tight">
+            Unparalleled Advice.
           </h1>
           
-          <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-            Strategic marketing, sponsorship activation, and sales consulting 
-            that transforms athletic partnerships into winning collaborations.
-          </p>
+          {/* Laptop Mockup Section */}
+          <div className="relative mx-auto max-w-5xl">
+            {/* Coral accent blocks */}
+            <div className="absolute -left-32 top-1/2 -translate-y-1/2 w-64 h-64 bg-coral rounded-3xl -z-10 hidden lg:block"></div>
+            <div className="absolute -right-32 top-1/2 -translate-y-1/2 w-80 h-80 bg-coral rounded-3xl -z-10 hidden lg:block"></div>
+            
+            {/* Laptop Frame */}
+            <div className="relative bg-gray-900 rounded-2xl p-3 shadow-2xl">
+              {/* Screen */}
+              <div className="bg-black rounded-lg overflow-hidden aspect-[16/10]">
+                <img 
+                  src={footballImage} 
+                  alt="Sports action in stadium" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {/* Laptop bottom */}
+              <div className="h-4 bg-gray-800 rounded-b-xl mt-1"></div>
+            </div>
+          </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
-              size="lg" 
-              className="bg-accent hover:bg-accent/90 text-accent-foreground group"
-            >
-              Start Your Journey
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-            >
-              View Our Work
-            </Button>
+          {/* Trusted by section */}
+          <div className="mt-16 text-center">
+            <p className="text-sm text-muted-foreground font-medium">Trusted by:</p>
           </div>
         </div>
       </div>
-      
-      {/* Decorative elements */}
-      <div className="absolute top-1/4 left-10 w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
     </section>
   );
 };
