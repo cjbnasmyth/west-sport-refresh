@@ -1,10 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import racingCarImage from "@/assets/racing-car.jpg";
 
 const Hero = () => {
   return (
     <section id="home" className="pt-32 pb-20 lg:pt-40 lg:pb-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-accent/10 via-background to-background"></div>
+      <div className="absolute inset-0 bg-background">
+        <div className="absolute inset-0 opacity-20">
+          <img 
+            src={racingCarImage} 
+            alt="Sports action" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/90 to-background"></div>
+      </div>
       
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
