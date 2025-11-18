@@ -1,4 +1,5 @@
 import { Award, Users, Zap } from "lucide-react";
+import surferImage from "@/assets/surfer.jpeg";
 
 const stats = [
   { icon: Award, value: "15+", label: "Years Experience" },
@@ -38,13 +39,18 @@ const About = () => {
           </div>
           
           <div className="relative">
-            <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary to-accent/50 p-1">
-              <div className="w-full h-full rounded-xl bg-background flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent mb-4">
+            <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
+              <img 
+                src={surferImage} 
+                alt="Sports excellence in action" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent flex items-end p-8">
+                <div className="text-center w-full">
+                  <div className="text-5xl font-bold text-white mb-2">
                     26W
                   </div>
-                  <p className="text-xl text-muted-foreground">
+                  <p className="text-lg text-white/90 font-medium">
                     Your Success is Our Mission
                   </p>
                 </div>

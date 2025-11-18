@@ -1,5 +1,6 @@
 import { Target, TrendingUp, Handshake, Megaphone } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import footballImage from "@/assets/football.webp";
 
 const services = [
   {
@@ -26,8 +27,16 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="py-20 lg:py-32 bg-secondary/30">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section id="services" className="py-20 lg:py-32 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-5">
+        <img 
+          src={footballImage} 
+          alt="Sports background" 
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="absolute inset-0 bg-secondary/50"></div>
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             What We Offer
