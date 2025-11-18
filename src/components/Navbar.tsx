@@ -6,10 +6,9 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "Services", href: "#services" },
-    { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" },
+    { name: "About Us", href: "#about" },
+    { name: "Blog", href: "#blog" },
+    { name: "Customers", href: "#customers" },
   ];
 
   return (
@@ -34,9 +33,9 @@ const Navbar = () => {
             ))}
             <Button 
               variant="default" 
-              className="bg-accent hover:bg-accent/90 text-accent-foreground"
+              className="bg-coral hover:bg-coral/90 text-white rounded-full px-6"
             >
-              Get Started
+              Contact Us →
             </Button>
           </div>
 
@@ -69,9 +68,9 @@ const Navbar = () => {
               ))}
               <Button 
                 variant="default" 
-                className="bg-accent hover:bg-accent/90 text-accent-foreground w-full"
+                className="bg-coral hover:bg-coral/90 text-white rounded-full px-6 w-full"
               >
-                Get Started
+                Contact Us →
               </Button>
             </div>
           </div>
