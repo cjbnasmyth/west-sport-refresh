@@ -34,7 +34,7 @@ jobs:
         with:
           publish_dir: ./dist
           publish_branch: gh-pages
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.ACTIONS_DEPLOY_TOKEN }}
           # Allow the action to create the branch even if no files changed
           allow_empty_commit: true
           # Use an explicit commit message to aid debugging
