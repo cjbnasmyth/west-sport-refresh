@@ -1,6 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 
+
+const manualUrns = import.meta.env.VITE_LINKEDIN_POST_URNS?.split(',') || [];
+const postUrns = data?.posts || manualUrns;
+
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 interface LinkedInPostsResponse {
