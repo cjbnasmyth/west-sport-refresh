@@ -5,6 +5,9 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  // Base public path when served from GitHub Pages repository pages
+  // Replace with your repo name if different
+  base: "/west-sport-refresh/",
   server: {
     host: "::",
     port: 8080,
@@ -27,4 +30,5 @@ export default defineConfig(({ mode }) => ({
       "fermentable-juan-nondeclamatory.ngrok-free.dev",
     ],
   },
+
 }));
