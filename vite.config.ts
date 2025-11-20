@@ -21,4 +21,10 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  preview: {
+    // Allow the ngrok host so the Vite preview server accepts proxied requests
+    allowedHosts: [
+      "fermentable-juan-nondeclamatory.ngrok-free.dev",
+    ],
+  },
 }));
