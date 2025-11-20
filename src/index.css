@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -97,5 +99,109 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-image: radial-gradient(circle at top, hsla(var(--coral) / 0.08), transparent 40%),
+      radial-gradient(circle at 20% 20%, hsla(var(--navy-light) / 0.08), transparent 55%);
+    min-height: 100vh;
+    letter-spacing: -0.01em;
+  }
+
+  #root {
+    min-height: 100vh;
+    background-color: hsl(var(--background));
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .font-serif {
+    font-family: "Playfair Display", "Times New Roman", serif;
+    letter-spacing: -0.04em;
+  }
+
+  p,
+  a,
+  li,
+  span {
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition-base);
+  }
+
+  a:hover {
+    color: hsl(var(--accent));
+  }
+
+  nav {
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  nav a {
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+
+  section {
+    scroll-margin-top: 120px;
+  }
+
+  #home {
+    background-color: hsl(var(--background));
+    background-image: radial-gradient(circle at 10% 20%, hsla(var(--coral) / 0.15), transparent 45%),
+      radial-gradient(circle at 90% 30%, hsla(var(--navy-light) / 0.12), transparent 50%);
+    background-repeat: no-repeat;
+    background-size: 120% 120%;
+  }
+
+  #home h1 {
+    font-size: clamp(3.25rem, 6vw, 6rem);
+    text-align: center;
+    line-height: 1.05;
+  }
+
+  #home img {
+    border-radius: 1.25rem;
+    box-shadow: 0 25px 60px rgba(15, 23, 42, 0.35);
+  }
+}
+
+@layer components {
+  .section-shell {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .pill-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.75rem;
+    border-radius: 999px;
+    background: var(--gradient-accent);
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: var(--transition-base);
+  }
+
+  .pill-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(191, 95, 62, 0.35);
+  }
+
+  .card-surface {
+    background-color: hsl(var(--card));
+    box-shadow: var(--shadow-lg);
+    border-radius: 1.5rem;
   }
 }

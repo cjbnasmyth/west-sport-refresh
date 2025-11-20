@@ -17,7 +17,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <span className="text-2xl font-bold text-primary">26 WEST SPORT</span>
+            <img src="/logo.jpg" alt="26 West Sport" className="h-12 w-auto rounded-2xl shadow-sm" loading="lazy" />
           </div>
 
           {/* Desktop Navigation */}
