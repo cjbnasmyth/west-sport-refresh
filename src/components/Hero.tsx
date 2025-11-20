@@ -1,4 +1,6 @@
+
 import footballImage from "@/assets/football.webp";
+import BrandLogoCarousel from "./BrandLogoCarousel";
 
 const Hero = () => {
   return (
@@ -33,7 +35,14 @@ const Hero = () => {
           
           {/* Trusted by section */}
           <div className="mt-16 text-center">
-            <p className="text-sm text-muted-foreground font-medium">Trusted by:</p>
+            <p className="text-sm text-muted-foreground font-medium mb-0">Trusted by:</p>
+            <div className="-mt-12">
+              <BrandLogoCarousel
+                logos={Array.from({ length: 5 })
+                  .map((_, i) => `/brand${i + 1}.png`)}
+                speed={60}
+              />
+            </div>
           </div>
         </div>
       </div>

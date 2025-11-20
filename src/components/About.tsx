@@ -46,14 +46,6 @@ const About = () => {
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent flex items-end p-8">
-                <div className="text-center w-full">
-                  <div className="text-5xl font-bold text-white mb-2">
-                    26W
-                  </div>
-                  <p className="text-lg text-white/90 font-medium">
-                    Your Success is Our Mission
-                  </p>
-                </div>
               </div>
             </div>
           </div>

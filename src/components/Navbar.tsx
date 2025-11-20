@@ -7,8 +7,8 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "About Us", href: "#about" },
+    {name: "Services", href: "#services" },
     { name: "Blog", href: "#blog" },
-    { name: "Customers", href: "#customers" },
   ];
 
   return (
@@ -17,7 +17,9 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <img src="/logo.jpg" alt="26 West Sport" className="h-12 w-auto rounded-2xl shadow-sm" loading="lazy" />
+            <a href="#home" aria-label="Go to top">
+              <img src="/logo.jpg" alt="26 West Sport" className="h-12 w-auto rounded-2xl shadow-sm" loading="lazy" />
+            </a>
           </div>
 
           {/* Desktop Navigation */}

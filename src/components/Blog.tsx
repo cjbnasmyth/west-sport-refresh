@@ -1,41 +1,47 @@
-import { useQuery } from "@tanstack/react-query";
-import { Loader2 } from "lucide-react";
+import React from "react";
 
+const manualUrns = import.meta.env.VITE_LINKEDIN_POST_URNS?.split(',').filter(Boolean) || [];
 
-const manualUrns = import.meta.env.VITE_LINKEDIN_POST_URNS?.split(',') || [];
-const postUrns = data?.posts || manualUrns;
-
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
-
-interface LinkedInPostsResponse {
-  posts: string[];
-  profileUrl?: string;
-  message?: string;
-  error?: string;
-}
-
-const fetchLinkedInPosts = async (profileUrl: string): Promise<LinkedInPostsResponse> => {
-  const response = await fetch(`${API_URL}/api/linkedin/posts?url=${encodeURIComponent(profileUrl)}`);
-  if (!response.ok) {
-    throw new Error("Failed to fetch LinkedIn posts");
-  }
-  return response.json();
-};
 
 const Blog = () => {
-  const linkedInProfileUrl =
-    import.meta.env.VITE_LINKEDIN_PROFILE_URL || "https://www.linkedin.com/in/your-profile";
+  const linkedInProfileUrl = import.meta.env.VITE_LINKEDIN_PROFILE_URL || "https://www.linkedin.com/in/your-profile";
+  const postUrns = manualUrns;
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["linkedin-posts", linkedInProfileUrl],
-    queryFn: () => fetchLinkedInPosts(linkedInProfileUrl),
-    enabled: !!linkedInProfileUrl && linkedInProfileUrl !== "https://www.linkedin.com/in/your-profile",
-    staleTime: 1000 * 60 * 10, // Cache for 10 minutes
-    retry: 1,
-  });
+  const ResponsiveIframe = ({ src, title }: { src: string; title: string }) => {
+    const wrapRef = React.useRef<HTMLDivElement | null>(null);
+    const [height, setHeight] = React.useState<number>(720);
 
-  const postUrns = data?.posts || [];
-  const displayProfileUrl = data?.profileUrl || linkedInProfileUrl;
+    React.useEffect(() => {
+      if (!wrapRef.current) return;
+      const ro = new ResizeObserver((entries) => {
+        const w = Math.round(entries[0].contentRect.width);
+        // Use different ratios depending on available width to avoid excessive whitespace
+        let ratio = 0.9;
+        if (w >= 1200) ratio = 0.5; // large desktop: shallower ratio
+        else if (w >= 900) ratio = 0.65; // laptop
+        else if (w >= 600) ratio = 0.85; // tablet
+        else ratio = 1.0; // phones: keep tall
+
+        const h = Math.max(360, Math.min(1200, Math.round(w * ratio)));
+        setHeight(h);
+      });
+      ro.observe(wrapRef.current);
+      return () => ro.disconnect();
+    }, []);
+
+    return (
+      <div ref={wrapRef} className="w-full max-w-3xl">
+        <iframe
+          src={src}
+          className="w-full block rounded-3xl border border-border bg-white"
+          frameBorder="0"
+          allowFullScreen
+          title={title}
+          style={{ height }}
+        />
+      </div>
+    );
+  };
 
   return (
     <section id="blog" className="py-20 lg:py-32 bg-secondary/40">
@@ -51,7 +57,7 @@ const Blog = () => {
           </p>
           <a
             className="pill-button mt-8 inline-flex items-center gap-2"
-            href={displayProfileUrl}
+            href={linkedInProfileUrl}
             target="_blank"
             rel="noreferrer"
           >
@@ -60,55 +66,21 @@ const Blog = () => {
           </a>
         </div>
 
-        {isLoading && (
-          <div className="flex items-center justify-center py-20">
-            <Loader2 className="h-8 w-8 animate-spin text-accent" />
-            <span className="ml-3 text-muted-foreground">Fetching latest posts from LinkedIn...</span>
-          </div>
-        )}
-
-        {error && (
-          <div className="mt-10 text-center">
-            <p className="text-destructive mb-2">Failed to fetch LinkedIn posts</p>
-            <p className="text-sm text-muted-foreground">
-              Make sure the backend API is running and <code className="px-2 py-1 rounded bg-secondary text-foreground">VITE_LINKEDIN_PROFILE_URL</code> is set correctly.
-            </p>
-            <p className="text-xs text-muted-foreground mt-2">
-              You can also manually provide URNs using <code className="px-2 py-1 rounded bg-secondary text-foreground">VITE_LINKEDIN_POST_URNS</code>
-            </p>
-          </div>
-        )}
-
-        {!isLoading && !error && postUrns.length === 0 && (
+        {postUrns.length === 0 ? (
           <div className="mt-10 text-center text-muted-foreground">
             <p className="mb-2">No posts found.</p>
             <p className="text-sm">
-              Make sure <code className="px-2 py-1 rounded bg-secondary text-foreground">VITE_LINKEDIN_PROFILE_URL</code> is set to a valid LinkedIn profile URL in your <code>.env</code> file.
-            </p>
-            <p className="text-xs mt-2">
-              Alternatively, you can manually provide URNs using <code className="px-2 py-1 rounded bg-secondary text-foreground">VITE_LINKEDIN_POST_URNS</code>
+              Make sure <code className="px-2 py-1 rounded bg-secondary text-foreground">VITE_LINKEDIN_POST_URNS</code> is set to a comma-separated list of post URNs in your <code>.env</code> file.
             </p>
           </div>
-        )}
-
-        {!isLoading && !error && postUrns.length > 0 && (
-          <div className="grid gap-10 lg:grid-cols-2">
+        ) : (
+          <div className="flex flex-col gap-10 items-center">
             {postUrns.map((urn) => (
-            <article key={urn} className="card-surface p-4 lg:p-6">
-              <div className="text-sm text-muted-foreground mb-3 font-medium tracking-[0.2em]">
-                LINKEDIN POST
-              </div>
-              <div className="rounded-3xl overflow-hidden border border-border bg-white">
-                <iframe
-                  src={`https://www.linkedin.com/embed/feed/update/${urn}`}
-                  height="550"
-                  className="w-full"
-                  frameBorder="0"
-                  allowFullScreen
-                  title={`LinkedIn post ${urn}`}
-                />
-              </div>
-            </article>
+              <ResponsiveIframe
+                key={urn}
+                src={`https://www.linkedin.com/embed/feed/update/${urn}`}
+                title={`LinkedIn post ${urn}`}
+              />
             ))}
           </div>
         )}
