@@ -5,9 +5,9 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // Base public path when served from GitHub Pages repository pages
-  // Replace with your repo name if different
-  base: "/west-sport-refresh/",
+  // Use a relative base so the built app works locally (`npm run preview`) and on GitHub Pages.
+  // Relative base avoids 404s when previewing the `dist` folder locally.
+  base: "./",
   server: {
     host: "::",
     port: 8080,
