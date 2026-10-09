@@ -17,7 +17,7 @@ import { gsap, ScrollTrigger, SplitText, useGSAP } from "@/lib/gsap";
 export function useScrollReveal(scope: RefObject<HTMLElement>) {
   useGSAP(
     () => {
-      // Content that resizes after load (e.g. LinkedIn embeds) shifts everything below it,
+      // Content that resizes after load (e.g. late-loading images) shifts everything below it,
       // so re-measure trigger positions whenever the page height changes.
       let refreshTimer: ReturnType<typeof setTimeout>;
       const ro = new ResizeObserver(() => {

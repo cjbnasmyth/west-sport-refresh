@@ -1,9 +1,6 @@
 import { useRef } from "react";
 import { gsap, SplitText, useGSAP } from "@/lib/gsap";
 import footballImage from "@/assets/football.webp";
-import BrandLogoCarousel from "./BrandLogoCarousel";
-
-const BRAND_LOGOS = [1, 2, 3, 4, 5].map((n) => `${import.meta.env.BASE_URL}brand${n}.png`);
 
 const Hero = () => {
   const root = useRef<HTMLElement>(null);
@@ -33,7 +30,6 @@ const Hero = () => {
           gsap.set(q("[data-anim=laptop]"), { autoAlpha: 0, y: 120 });
           gsap.set(q("[data-anim=screen]"), { clipPath: "inset(50% 0% 50% 0%)" });
           gsap.set(blocks, { scale: 0, rotation: -30 });
-          gsap.set(q("[data-anim=trusted]"), { autoAlpha: 0, y: 30 });
 
           let cancelled = false;
           document.fonts.ready.then(() => {
@@ -54,7 +50,6 @@ const Hero = () => {
                 .to(q("[data-anim=laptop]"), { autoAlpha: 1, y: 0, duration: 1.4 }, "-=0.7")
                 .to(q("[data-anim=screen]"), { clipPath: "inset(0% 0% 0% 0%)", duration: 0.9, ease: "power3.inOut" }, "-=0.9")
                 .to(blocks, { scale: 1, rotation: 0, duration: 1, stagger: 0.12, ease: "back.out(1.6)" }, "-=0.9")
-                .to(q("[data-anim=trusted]"), { autoAlpha: 1, y: 0, duration: 0.8 }, "-=0.6")
                 .add(() => split.revert());
             });
           });
@@ -150,7 +145,7 @@ const Hero = () => {
   );
 
   return (
-    <section ref={root} id="home" className="pt-32 pb-20 lg:pt-40 lg:pb-32 bg-background relative overflow-hidden">
+    <section ref={root} id="home" className="pt-32 pb-8 lg:pt-40 lg:pb-12 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Main Heading */}
@@ -209,12 +204,6 @@ const Hero = () => {
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Trusted by section */}
-          <div data-anim="trusted" className="mt-20 text-center">
-            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium mb-6">Trusted by</p>
-            <BrandLogoCarousel logos={BRAND_LOGOS} />
           </div>
         </div>
       </div>

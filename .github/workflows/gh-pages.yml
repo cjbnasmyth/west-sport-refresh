@@ -4,6 +4,15 @@ on:
   push:
     branches:
       - main
+  # Rebuild daily so the Insights section picks up new LinkedIn posts (see scripts/fetch-linkedin-posts.mjs).
+  schedule:
+    - cron: "0 6 * * *"
+  # Allow a manual rebuild from the Actions tab.
+  workflow_dispatch:
+
+concurrency:
+  group: gh-pages-deploy
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
@@ -31,7 +40,9 @@ jobs:
         env:
           # Set these under Settings → Secrets and variables → Actions → Variables
           VITE_LINKEDIN_PROFILE_URL: ${{ vars.VITE_LINKEDIN_PROFILE_URL }}
+          # Leave VITE_LINKEDIN_POST_URNS unset to show the latest posts automatically; set it to pin specific posts.
           VITE_LINKEDIN_POST_URNS: ${{ vars.VITE_LINKEDIN_POST_URNS }}
+          VITE_LINKEDIN_POST_COUNT: ${{ vars.VITE_LINKEDIN_POST_COUNT }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

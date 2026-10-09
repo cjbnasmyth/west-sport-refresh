@@ -1,44 +1,76 @@
-import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Play } from "lucide-react";
+import posts from "@/data/linkedin-posts.json";
 
-const postUrns: string[] =
-  import.meta.env.VITE_LINKEDIN_POST_URNS?.split(",").map((u: string) => u.trim()).filter(Boolean) ?? [];
-const linkedInProfileUrl = import.meta.env.VITE_LINKEDIN_PROFILE_URL || "https://www.linkedin.com/";
-
-const ResponsiveIframe = ({ src, title }: { src: string; title: string }) => {
-  const wrapRef = useRef<HTMLDivElement | null>(null);
-  const [height, setHeight] = useState<number>(720);
-
-  useEffect(() => {
-    if (!wrapRef.current) return;
-    const ro = new ResizeObserver((entries) => {
-      const w = Math.round(entries[0].contentRect.width);
-      // Use different ratios depending on available width to avoid excessive whitespace
-      let ratio = 0.9;
-      if (w >= 1200) ratio = 0.5; // large desktop: shallower ratio
-      else if (w >= 900) ratio = 0.65; // laptop
-      else if (w >= 600) ratio = 0.85; // tablet
-      else ratio = 1.0; // phones: keep tall
-
-      const h = Math.max(360, Math.min(1200, Math.round(w * ratio)));
-      setHeight(h);
-    });
-    ro.observe(wrapRef.current);
-    return () => ro.disconnect();
-  }, []);
-
-  return (
-    <div ref={wrapRef} className="w-full max-w-3xl">
-      <iframe
-        src={src}
-        className="w-full block rounded-3xl border border-border bg-white"
-        allowFullScreen
-        loading="lazy"
-        title={title}
-        style={{ height }}
-      />
-    </div>
-  );
+// Posts are snapshotted from LinkedIn at build time by scripts/fetch-linkedin-posts.mjs.
+type Post = {
+  urn: string;
+  url: string;
+  type: "article" | "video" | "post";
+  title: string;
+  excerpt: string;
+  author: string | null;
+  image: string | null;
+  date: string;
 };
+
+const linkedInProfileUrl = import.meta.env.VITE_LINKEDIN_PROFILE_URL || "https://www.linkedin.com/";
+const TYPE_LABEL = { article: "Article", video: "Video", post: "Post" } as const;
+
+const formatDate = (iso: string) =>
+  new Date(iso).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" });
+
+const PostCard = ({ post }: { post: Post }) => (
+  <a
+    href={post.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm transition-[box-shadow,transform] duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral-deep focus-visible:ring-offset-2"
+  >
+    <div className="relative aspect-[16/9] overflow-hidden bg-navy">
+      {post.image ? (
+        <img
+          src={post.image}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          referrerPolicy="no-referrer"
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none"
+        />
+      ) : (
+        <div className="grid h-full place-items-center">
+          <img src={`${import.meta.env.BASE_URL}logo/mark.png`} alt="" className="w-16 opacity-90" />
+        </div>
+      )}
+      <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-navy backdrop-blur-sm">
+        {TYPE_LABEL[post.type]}
+      </span>
+      {post.type === "video" && (
+        <span className="absolute inset-0 grid place-items-center">
+          <span className="grid h-14 w-14 place-items-center rounded-full bg-white/90 text-navy shadow-lg transition-transform duration-300 group-hover:scale-110">
+            <Play aria-hidden="true" className="ml-0.5 h-5 w-5 fill-current" />
+          </span>
+        </span>
+      )}
+    </div>
+
+    <div className="flex flex-1 flex-col p-6">
+      <p className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
+        <time dateTime={post.date}>{formatDate(post.date)}</time>
+        {post.author && <> · {post.author}</>}
+      </p>
+      <h3 className="mb-3 line-clamp-3 text-xl font-bold leading-snug text-foreground">{post.title}</h3>
+      {post.excerpt && <p className="mb-6 line-clamp-3 text-sm leading-relaxed text-muted-foreground">{post.excerpt}</p>}
+      <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-coral-deep">
+        Read on LinkedIn
+        <ArrowUpRight
+          aria-hidden="true"
+          className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+        />
+        <span className="sr-only">(opens in a new tab)</span>
+      </span>
+    </div>
+  </a>
+);
 
 const Blog = () => {
   return (
@@ -50,8 +82,7 @@ const Blog = () => {
             Direct from LinkedIn
           </h2>
           <p data-reveal="up" className="text-lg text-muted-foreground mt-4">
-            Stay up-to-date with the latest thoughts, industry POVs, and wins we share on LinkedIn. The cards
-            below automatically embed the specified posts so they stay synced with your live profile.
+            Perspectives on sports media, rights and sponsorship, shared by our team on LinkedIn.
           </p>
           <div data-reveal="up">
             <a
@@ -60,29 +91,27 @@ const Blog = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              View on LinkedIn
+              Follow on LinkedIn
               <span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>
 
-        {postUrns.length === 0 ? (
+        {posts.length === 0 ? (
           import.meta.env.DEV && (
             <p className="mt-10 text-center text-sm text-muted-foreground">
-              Set <code className="px-2 py-1 rounded bg-secondary text-foreground">VITE_LINKEDIN_POST_URNS</code> in{" "}
-              <code>.env</code> to a comma-separated list of post URNs.
+              No posts yet. Set <code className="px-2 py-1 rounded bg-secondary text-foreground">VITE_LINKEDIN_POST_URNS</code>{" "}
+              and run <code>npm run posts</code>.
             </p>
           )
         ) : (
-          <div data-reveal="stagger" className="flex flex-col gap-10 items-center">
-            {postUrns.map((urn) => (
-              <ResponsiveIframe
-                key={urn}
-                src={`https://www.linkedin.com/embed/feed/update/${urn}`}
-                title={`LinkedIn post ${urn}`}
-              />
+          <ul data-reveal="stagger" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {(posts as Post[]).map((post) => (
+              <li key={post.urn}>
+                <PostCard post={post} />
+              </li>
             ))}
-          </div>
+          </ul>
         )}
       </div>
     </section>
@@ -90,4 +119,3 @@ const Blog = () => {
 };
 
 export default Blog;
-

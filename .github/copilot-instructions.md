@@ -35,7 +35,7 @@
 - **Environment Variables:** All runtime config is via `VITE_*` env vars (see `.env` and usage in components).
 
 ## Integration Points
-- **LinkedIn Blog:** `Blog.tsx` embeds the posts listed in `VITE_LINKEDIN_POST_URNS` as LinkedIn iframes.
+- **LinkedIn Insights:** `scripts/fetch-linkedin-posts.mjs` (runs as `prebuild`, or `npm run posts`) snapshots the latest posts from the public profile at `VITE_LINKEDIN_PROFILE_URL` (or the pinned `VITE_LINKEDIN_POST_URNS`) into `src/data/linkedin-posts.json`; `Blog.tsx` renders them as cards linking to LinkedIn.
 - **shadcn-ui:** Only the primitives in use are kept in `src/components/ui/`; add more with `npx shadcn@latest add <component>`.
 
 ## Examples
