@@ -53,6 +53,7 @@ export default {
         navy: "hsl(var(--navy))",
         "navy-light": "hsl(var(--navy-light))",
         coral: "hsl(var(--coral))",
+        "coral-deep": "hsl(var(--coral-deep))",
         "gray-light": "hsl(var(--gray-light))",
         "gray-medium": "hsl(var(--gray-medium))",
       },
@@ -66,14 +67,9 @@ export default {
           from: { opacity: "0", transform: "translateY(10px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
-        marquee: {
-          from: { transform: "translateX(0)" },
-          to: { transform: "translateX(-50%)" },
-        },
       },
       animation: {
         "fade-in": "fade-in 0.3s ease-out",
-        marquee: "marquee var(--marquee-duration, 30s) linear infinite",
       },
     },
   },

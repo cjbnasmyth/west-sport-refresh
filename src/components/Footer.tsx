@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className="bg-secondary/40 text-foreground py-12">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid md:grid-cols-3 gap-8 mb-8 items-start">
+        <div data-reveal="stagger" className="grid md:grid-cols-3 gap-8 mb-8 items-start">
           <div className="flex flex-col items-start">
             <a href="#home" className="inline-flex items-center mb-4">
               <img src={`${import.meta.env.BASE_URL}logo.jpg`} alt="26 West Sport" className="h-10 md:h-12 object-contain" />
@@ -68,7 +68,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-border pt-8 text-center text-muted-foreground">
+        <div data-reveal="up" className="border-t border-border pt-8 text-center text-muted-foreground">
           <div className="flex items-center justify-center gap-3">
             <img src={`${import.meta.env.BASE_URL}logo.jpg`} alt="26 West Sport" className="h-6 w-auto opacity-80" />
             <p>&copy; {new Date().getFullYear()} 26 West Sport. All rights reserved.</p>

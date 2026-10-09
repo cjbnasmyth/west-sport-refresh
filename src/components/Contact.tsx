@@ -9,17 +9,17 @@ const Contact = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            <h2 data-reveal="heading" className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               Let's Connect
             </h2>
-            <p className="text-xl text-muted-foreground">
+            <p data-reveal="up" className="text-xl text-muted-foreground">
               Ready to take your sports brand to the next level? Get in touch today.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <div className="bg-card p-8 rounded-2xl shadow-md">
+            <div data-reveal="left" className="bg-card p-8 rounded-2xl shadow-md">
               <form className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2 text-foreground">
@@ -67,7 +67,7 @@ const Contact = () => {
             </div>
 
             {/* Contact Information */}
-            <div className="space-y-8">
+            <div data-reveal="right" className="space-y-8">
               <div>
                 <h3 className="text-2xl font-bold text-foreground mb-6">
                   Get in Touch
@@ -79,7 +79,7 @@ const Contact = () => {
                 </p>
               </div>
 
-              <div className="space-y-6">
+              <div data-reveal="stagger" className="space-y-6">
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
                     <Mail className="h-6 w-6 text-accent" />

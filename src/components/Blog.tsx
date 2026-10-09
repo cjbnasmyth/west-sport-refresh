@@ -45,23 +45,25 @@ const Blog = () => {
     <section id="blog" className="py-20 lg:py-32 bg-secondary/40">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground mb-3">Insights</p>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground leading-tight">
+          <p data-reveal="up" className="text-sm uppercase tracking-[0.3em] text-muted-foreground mb-3">Insights</p>
+          <h2 data-reveal="heading" className="text-4xl md:text-5xl font-serif font-bold text-foreground leading-tight">
             Direct from LinkedIn
           </h2>
-          <p className="text-lg text-muted-foreground mt-4">
+          <p data-reveal="up" className="text-lg text-muted-foreground mt-4">
             Stay up-to-date with the latest thoughts, industry POVs, and wins we share on LinkedIn. The cards
             below automatically embed the specified posts so they stay synced with your live profile.
           </p>
-          <a
-            className="pill-button mt-8 inline-flex items-center gap-2"
-            href={linkedInProfileUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View on LinkedIn
-            <span aria-hidden="true">↗</span>
-          </a>
+          <div data-reveal="up">
+            <a
+              className="pill-button mt-8 inline-flex items-center gap-2"
+              href={linkedInProfileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View on LinkedIn
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
         </div>
 
         {postUrns.length === 0 ? (
@@ -72,7 +74,7 @@ const Blog = () => {
             </p>
           )
         ) : (
-          <div className="flex flex-col gap-10 items-center">
+          <div data-reveal="stagger" className="flex flex-col gap-10 items-center">
             {postUrns.map((urn) => (
               <ResponsiveIframe
                 key={urn}
