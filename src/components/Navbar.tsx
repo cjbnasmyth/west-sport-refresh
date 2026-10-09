@@ -2,17 +2,10 @@ import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { ArrowRight, Linkedin, Mail } from "lucide-react";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
+import { CONTACT_LINK, EMAIL, LINKEDIN_URL, NAV_LINKS } from "@/lib/site";
 
 const BASE = import.meta.env.BASE_URL;
-const LINKEDIN_URL = import.meta.env.VITE_LINKEDIN_PROFILE_URL || "https://www.linkedin.com/";
-const EMAIL = "info@26westsport.com";
-
-const navLinks = [
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
-  { name: "Insights", href: "#blog" },
-];
-const menuLinks = [...navLinks, { name: "Contact", href: "#contact" }];
+const menuLinks = [...NAV_LINKS, CONTACT_LINK];
 const TRACKED_SECTIONS = ["about", "services", "blog", "contact"];
 
 const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -291,7 +284,7 @@ const Navbar = () => {
               className="pointer-events-none invisible absolute left-0 top-1/2 -mt-[18px] h-9 rounded-full bg-navy/[0.07] opacity-0"
             />
             <ul className="flex items-center">
-              {navLinks.map((link) => (
+              {NAV_LINKS.map((link) => (
                 <li key={link.href} data-anim="nav-item">
                   <a
                     href={link.href}

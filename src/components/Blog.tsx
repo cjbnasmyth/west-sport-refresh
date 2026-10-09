@@ -1,5 +1,6 @@
 import { ArrowUpRight, Play } from "lucide-react";
 import posts from "@/data/linkedin-posts.json";
+import { LINKEDIN_URL } from "@/lib/site";
 
 // Posts are snapshotted from LinkedIn at build time by scripts/fetch-linkedin-posts.mjs.
 type Post = {
@@ -13,7 +14,6 @@ type Post = {
   date: string;
 };
 
-const linkedInProfileUrl = import.meta.env.VITE_LINKEDIN_PROFILE_URL || "https://www.linkedin.com/";
 const TYPE_LABEL = { article: "Article", video: "Video", post: "Post" } as const;
 
 const formatDate = (iso: string) =>
@@ -87,7 +87,7 @@ const Blog = () => {
           <div data-reveal="up">
             <a
               className="pill-button mt-8 inline-flex items-center gap-2"
-              href={linkedInProfileUrl}
+              href={LINKEDIN_URL}
               target="_blank"
               rel="noopener noreferrer"
             >
