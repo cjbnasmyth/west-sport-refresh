@@ -31,8 +31,10 @@ const Services = () => {
       <div className="absolute inset-0 opacity-5">
         <img 
           src={footballImage} 
-          alt="Sports background" 
+          alt="" 
           className="w-full h-full object-cover"
+          loading="lazy"
+          decoding="async"
         />
       </div>
       <div className="absolute inset-0 bg-secondary/50"></div>

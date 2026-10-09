@@ -28,6 +28,10 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          # Set these under Settings → Secrets and variables → Actions → Variables
+          VITE_LINKEDIN_PROFILE_URL: ${{ vars.VITE_LINKEDIN_PROFILE_URL }}
+          VITE_LINKEDIN_POST_URNS: ${{ vars.VITE_LINKEDIN_POST_URNS }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

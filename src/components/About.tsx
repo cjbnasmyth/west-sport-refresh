@@ -1,5 +1,5 @@
 import { Award, Users, Zap } from "lucide-react";
-import surferImage from "@/assets/surfer.jpeg";
+import surferImage from "@/assets/surfer.webp";
 
 const stats = [
   { icon: Award, value: "15+", label: "Years Experience" },
@@ -44,9 +44,10 @@ const About = () => {
                 src={surferImage} 
                 alt="Sports excellence in action" 
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent flex items-end p-8">
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
             </div>
           </div>
         </div>

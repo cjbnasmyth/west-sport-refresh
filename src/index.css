@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -48,53 +46,26 @@ All colors MUST be HSL.
     --gray-medium: 220 10% 60%;
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(220 70% 15%) 0%, hsl(220 50% 25%) 100%);
     --gradient-accent: linear-gradient(135deg, hsl(12 88% 55%) 0%, hsl(25 95% 60%) 100%);
-    
-    /* Shadows */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
     
     /* Transitions */
     --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-smooth: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .dark {
-    --background: 220 26% 8%;
-    --foreground: 0 0% 98%;
-
-    --card: 220 26% 12%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 220 26% 12%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 0 0% 98%;
-    --primary-foreground: 220 70% 15%;
-
-    --secondary: 220 26% 18%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 220 26% 18%;
-    --muted-foreground: 220 10% 65%;
-
-    --accent: 12 88% 55%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 220 26% 18%;
-    --input: 220 26% 18%;
-    --ring: 0 0% 98%;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {
@@ -104,6 +75,8 @@ All colors MUST be HSL.
       radial-gradient(circle at 20% 20%, hsla(var(--navy-light) / 0.08), transparent 55%);
     min-height: 100vh;
     letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   #root {
@@ -175,12 +148,6 @@ All colors MUST be HSL.
 }
 
 @layer components {
-  .section-shell {
-    width: min(1200px, 100%);
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
-
   .pill-button {
     display: inline-flex;
     align-items: center;
@@ -197,11 +164,5 @@ All colors MUST be HSL.
   .pill-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 15px 35px rgba(191, 95, 62, 0.35);
-  }
-
-  .card-surface {
-    background-color: hsl(var(--card));
-    box-shadow: var(--shadow-lg);
-    border-radius: 1.5rem;
   }
 }

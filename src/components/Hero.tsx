@@ -2,6 +2,8 @@
 import footballImage from "@/assets/football.webp";
 import BrandLogoCarousel from "./BrandLogoCarousel";
 
+const BRAND_LOGOS = [1, 2, 3, 4, 5].map((n) => `${import.meta.env.BASE_URL}brand${n}.png`);
+
 const Hero = () => {
   return (
     <section id="home" className="pt-32 pb-20 lg:pt-40 lg:pb-32 bg-background relative overflow-visible">
@@ -26,6 +28,9 @@ const Hero = () => {
                   src={footballImage} 
                   alt="Sports action in stadium" 
                   className="w-full h-full object-cover"
+                  width={1440}
+                  height={960}
+                  fetchPriority="high"
                 />
               </div>
               {/* Laptop bottom */}
@@ -38,8 +43,7 @@ const Hero = () => {
             <p className="text-sm text-muted-foreground font-medium mb-0">Trusted by:</p>
             <div className="-mt-12">
               <BrandLogoCarousel
-                logos={Array.from({ length: 5 })
-                  .map((_, i) => `/brand${i + 1}.png`)}
+                logos={BRAND_LOGOS}
                 speed={60}
               />
             </div>

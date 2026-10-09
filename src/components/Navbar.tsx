@@ -2,14 +2,14 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+const navLinks = [
+  { name: "About Us", href: "#about" },
+  { name: "Services", href: "#services" },
+  { name: "Insights", href: "#blog" },
+];
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const navLinks = [
-    { name: "About Us", href: "#about" },
-    {name: "Services", href: "#services" },
-    { name: "Insights", href: "#blog" },
-  ];
 
   return (
     <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border z-50">
@@ -18,7 +18,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <a href="#home" aria-label="Go to top">
-              <img src="/logo.jpg" alt="26 West Sport" className="h-12 w-auto rounded-2xl shadow-sm" loading="lazy" />
+              <img src={`${import.meta.env.BASE_URL}logo.jpg`} alt="26 West Sport" className="h-12 w-auto rounded-2xl shadow-sm" />
             </a>
           </div>
 
@@ -33,11 +33,8 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <Button 
-              variant="default" 
-              className="bg-coral hover:bg-coral/90 text-white rounded-full px-6"
-            >
-              Contact Us →
+            <Button asChild className="bg-coral hover:bg-coral/90 text-white hover:text-white rounded-full px-6">
+              <a href="#contact">Contact Us →</a>
             </Button>
           </div>
 
@@ -48,6 +45,7 @@ const Navbar = () => {
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
+              aria-expanded={isOpen}
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
@@ -68,11 +66,10 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
-              <Button 
-                variant="default" 
-                className="bg-coral hover:bg-coral/90 text-white rounded-full px-6 w-full"
-              >
-                Contact Us →
+              <Button asChild className="bg-coral hover:bg-coral/90 text-white hover:text-white rounded-full px-6 w-full">
+                <a href="#contact" onClick={() => setIsOpen(false)}>
+                  Contact Us →
+                </a>
               </Button>
             </div>
           </div>

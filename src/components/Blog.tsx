@@ -1,48 +1,46 @@
-import React from "react";
+import { useEffect, useRef, useState } from "react";
 
-const manualUrns = import.meta.env.VITE_LINKEDIN_POST_URNS?.split(',').filter(Boolean) || [];
+const postUrns: string[] =
+  import.meta.env.VITE_LINKEDIN_POST_URNS?.split(",").map((u: string) => u.trim()).filter(Boolean) ?? [];
+const linkedInProfileUrl = import.meta.env.VITE_LINKEDIN_PROFILE_URL || "https://www.linkedin.com/";
 
+const ResponsiveIframe = ({ src, title }: { src: string; title: string }) => {
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+  const [height, setHeight] = useState<number>(720);
+
+  useEffect(() => {
+    if (!wrapRef.current) return;
+    const ro = new ResizeObserver((entries) => {
+      const w = Math.round(entries[0].contentRect.width);
+      // Use different ratios depending on available width to avoid excessive whitespace
+      let ratio = 0.9;
+      if (w >= 1200) ratio = 0.5; // large desktop: shallower ratio
+      else if (w >= 900) ratio = 0.65; // laptop
+      else if (w >= 600) ratio = 0.85; // tablet
+      else ratio = 1.0; // phones: keep tall
+
+      const h = Math.max(360, Math.min(1200, Math.round(w * ratio)));
+      setHeight(h);
+    });
+    ro.observe(wrapRef.current);
+    return () => ro.disconnect();
+  }, []);
+
+  return (
+    <div ref={wrapRef} className="w-full max-w-3xl">
+      <iframe
+        src={src}
+        className="w-full block rounded-3xl border border-border bg-white"
+        allowFullScreen
+        loading="lazy"
+        title={title}
+        style={{ height }}
+      />
+    </div>
+  );
+};
 
 const Blog = () => {
-  const linkedInProfileUrl = import.meta.env.VITE_LINKEDIN_PROFILE_URL || "https://www.linkedin.com/in/your-profile";
-  const postUrns = manualUrns;
-
-  const ResponsiveIframe = ({ src, title }: { src: string; title: string }) => {
-    const wrapRef = React.useRef<HTMLDivElement | null>(null);
-    const [height, setHeight] = React.useState<number>(720);
-
-    React.useEffect(() => {
-      if (!wrapRef.current) return;
-      const ro = new ResizeObserver((entries) => {
-        const w = Math.round(entries[0].contentRect.width);
-        // Use different ratios depending on available width to avoid excessive whitespace
-        let ratio = 0.9;
-        if (w >= 1200) ratio = 0.5; // large desktop: shallower ratio
-        else if (w >= 900) ratio = 0.65; // laptop
-        else if (w >= 600) ratio = 0.85; // tablet
-        else ratio = 1.0; // phones: keep tall
-
-        const h = Math.max(360, Math.min(1200, Math.round(w * ratio)));
-        setHeight(h);
-      });
-      ro.observe(wrapRef.current);
-      return () => ro.disconnect();
-    }, []);
-
-    return (
-      <div ref={wrapRef} className="w-full max-w-3xl">
-        <iframe
-          src={src}
-          className="w-full block rounded-3xl border border-border bg-white"
-          frameBorder="0"
-          allowFullScreen
-          title={title}
-          style={{ height }}
-        />
-      </div>
-    );
-  };
-
   return (
     <section id="blog" className="py-20 lg:py-32 bg-secondary/40">
       <div className="container mx-auto px-4 lg:px-8">
@@ -59,7 +57,7 @@ const Blog = () => {
             className="pill-button mt-8 inline-flex items-center gap-2"
             href={linkedInProfileUrl}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             View on LinkedIn
             <span aria-hidden="true">↗</span>
@@ -67,12 +65,12 @@ const Blog = () => {
         </div>
 
         {postUrns.length === 0 ? (
-          <div className="mt-10 text-center text-muted-foreground">
-            <p className="mb-2">No posts found.</p>
-            <p className="text-sm">
-              Make sure <code className="px-2 py-1 rounded bg-secondary text-foreground">VITE_LINKEDIN_POST_URNS</code> is set to a comma-separated list of post URNs in your <code>.env</code> file.
+          import.meta.env.DEV && (
+            <p className="mt-10 text-center text-sm text-muted-foreground">
+              Set <code className="px-2 py-1 rounded bg-secondary text-foreground">VITE_LINKEDIN_POST_URNS</code> in{" "}
+              <code>.env</code> to a comma-separated list of post URNs.
             </p>
-          </div>
+          )
         ) : (
           <div className="flex flex-col gap-10 items-center">
             {postUrns.map((urn) => (
