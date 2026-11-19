@@ -1,5 +1,6 @@
 # Pages CMS configuration: https://pagescms.org/docs/configuration/
 # Every editable file lives in src/content; the site reads them through src/content/index.ts.
+# Edit this file in place (or via the Pages CMS settings page) to change the editor forms.
 
 media:
   input: src/content/images
