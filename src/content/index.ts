@@ -23,8 +23,9 @@ export const image = (name: string) => {
   return url;
 };
 
-// Icons referenced by name in the JSON. Add new lucide icons here to make them available, and add the
-// name to both icon select lists in .pages.yml so editors can pick it.
+// Icons referenced by name in the JSON. Add new lucide icons here to make them available (and to the
+// icon lists in .pages.yml). Icons are hidden in the CMS, so items added there have no icon and get
+// the section's fallback.
 const icons: Record<string, LucideIcon> = {
   award: Award,
   handshake: Handshake,
@@ -35,7 +36,8 @@ const icons: Record<string, LucideIcon> = {
   zap: Zap,
 };
 
-const icon = (name: string) => {
+const icon = (name: string | undefined, fallback: LucideIcon) => {
+  if (!name) return fallback;
   const Icon = icons[name];
   if (!Icon) throw new Error(`Unknown content icon "${name}"; register it in src/content/index.ts`);
   return Icon;
@@ -57,14 +59,14 @@ export const hero = { ...heroJson, image: { ...heroJson.image, src: image(heroJs
 
 export const about = {
   ...aboutJson,
-  stats: aboutJson.stats.map((s) => ({ ...s, icon: icon(s.icon) })),
+  stats: aboutJson.stats.map((s) => ({ ...s, icon: icon(s.icon, Award) })),
   image: { ...aboutJson.image, src: image(aboutJson.image.src) },
 };
 
 export const services = {
   ...servicesJson,
   backgroundImage: image(servicesJson.backgroundImage),
-  items: servicesJson.items.map((s) => ({ ...s, icon: icon(s.icon) })),
+  items: servicesJson.items.map((s) => ({ ...s, icon: icon(s.icon, Target) })),
 };
 
 export const insights = insightsJson;

@@ -154,6 +154,7 @@ content:
           - name: icon
             label: Icon
             type: select
+            hidden: true
             options:
               values: [award, users, zap, target, handshake, trending-up, megaphone]
           - name: value
@@ -202,6 +203,7 @@ content:
           - name: icon
             label: Icon
             type: select
+            hidden: true
             options:
               values: [award, users, zap, target, handshake, trending-up, megaphone]
           - name: title
