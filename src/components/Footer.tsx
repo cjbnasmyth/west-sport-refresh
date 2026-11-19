@@ -1,8 +1,7 @@
 import { ArrowUp, Linkedin } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { CONTACT_LINK, EMAIL, LINKEDIN_URL, NAV_LINKS, X_URL } from "@/lib/site";
+import { site } from "@/content";
 
-const BASE = import.meta.env.BASE_URL;
 const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral-deep focus-visible:ring-offset-2";
 
 // lucide only ships the old Twitter bird, so draw the current X mark.
@@ -13,8 +12,8 @@ const XLogo = ({ className }: { className?: string }) => (
 );
 
 const socialLinks = [
-  { name: "LinkedIn", href: LINKEDIN_URL, Icon: Linkedin },
-  { name: "X", href: X_URL, Icon: XLogo },
+  { name: "LinkedIn", href: site.social.linkedin, Icon: Linkedin },
+  { name: "X", href: site.social.x, Icon: XLogo },
 ];
 
 const backToTop = () => {
@@ -31,16 +30,16 @@ const Footer = () => {
         <div data-reveal="stagger" className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
           <a
             href="#home"
-            aria-label="26 West Sport, back to top"
+            aria-label={`${site.name}, back to top`}
             className={cn("flex items-center gap-2.5 self-start rounded-full lg:self-auto", focusRing)}
           >
-            <img src={`${BASE}logo/mark.png`} alt="" className="h-7 w-auto" />
-            <img src={`${BASE}logo/word-navy.png`} alt="" className="h-4 w-auto" />
+            <img src={site.logos.mark} alt="" className="h-7 w-auto" />
+            <img src={site.logos.wordNavy} alt="" className="h-4 w-auto" />
           </a>
 
           <nav aria-label="Footer">
             <ul className="-mx-3 flex flex-wrap items-center gap-x-1">
-              {[...NAV_LINKS, CONTACT_LINK].map((link) => (
+              {[...site.nav, site.contactLink].map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
@@ -61,13 +60,13 @@ const Footer = () => {
 
           <div className="flex flex-wrap items-center gap-4">
             <a
-              href={`mailto:${EMAIL}`}
+              href={`mailto:${site.email}`}
               className={cn(
                 "rounded-sm text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-navy hover:underline",
                 focusRing,
               )}
             >
-              {EMAIL}
+              {site.email}
             </a>
             <ul className="flex items-center gap-2">
               {socialLinks.map(({ name, href, Icon }) => (
@@ -94,13 +93,13 @@ const Footer = () => {
           data-reveal="up"
           className="mt-10 flex items-center justify-between gap-4 border-t border-navy/10 pt-6 text-sm text-muted-foreground"
         >
-          <p>&copy; {new Date().getFullYear()} 26 West Sport</p>
+          <p>&copy; {new Date().getFullYear()} {site.name}</p>
           <button
             type="button"
             onClick={backToTop}
             className={cn("group inline-flex items-center gap-2 rounded-full py-2 font-medium transition-colors hover:text-navy", focusRing)}
           >
-            Back to top
+            {site.footer.backToTop}
             <ArrowUp
               aria-hidden="true"
               className="h-4 w-4 transition-transform duration-300 motion-safe:group-hover:-translate-y-0.5"

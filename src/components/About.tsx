@@ -1,11 +1,4 @@
-import { Award, Users, Zap } from "lucide-react";
-import surferImage from "@/assets/surfer.webp";
-
-const stats = [
-  { icon: Award, value: 15, suffix: "+", label: "Years Experience" },
-  { icon: Users, value: 100, suffix: "+", label: "Successful Partnerships" },
-  { icon: Zap, value: 500, suffix: "M+", label: "In Revenue Generated" },
-];
+import { about } from "@/content";
 
 const About = () => {
   return (
@@ -14,21 +7,21 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 data-reveal="heading" className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Your Partner in
-              <span className="block text-accent">Sports Success</span>
+              {about.title}
+              <span className="block text-accent">{about.titleAccent}</span>
             </h2>
-            <p data-reveal="up" className="text-lg text-muted-foreground mb-6 leading-relaxed">
-              With over a decade of experience in sports marketing and sponsorship activation, 
-              26 West Sport specializes in creating strategic partnerships that deliver results.
-            </p>
-            <p data-reveal="up" className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              We understand the unique challenges of the sports industry and provide tailored 
-              solutions that maximize your brand's potential, whether you're an athlete, team, 
-              or corporate partner looking to make an impact.
-            </p>
+            {about.paragraphs.map((text, index) => (
+              <p
+                key={index}
+                data-reveal="up"
+                className={`text-lg text-muted-foreground leading-relaxed ${index === about.paragraphs.length - 1 ? "mb-8" : "mb-6"}`}
+              >
+                {text}
+              </p>
+            ))}
             
             <div data-reveal="stagger" className="grid grid-cols-3 gap-6">
-              {stats.map((stat, index) => (
+              {about.stats.map((stat, index) => (
                 <div key={index} className="text-center p-4 rounded-lg bg-secondary/50">
                   <stat.icon className="h-8 w-8 text-accent mx-auto mb-2" />
                   <div
@@ -48,8 +41,8 @@ const About = () => {
           <div className="relative">
             <div data-reveal="image" className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
               <img 
-                src={surferImage} 
-                alt="Sports excellence in action" 
+                src={about.image.src}
+                alt={about.image.alt}
                 className="w-full h-full object-cover"
                 loading="lazy"
                 decoding="async"

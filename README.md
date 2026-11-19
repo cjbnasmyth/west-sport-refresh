@@ -13,6 +13,22 @@ npm run preview   # serve dist/ locally
 npm run lint
 ```
 
+## Editing content
+
+All site copy and imagery lives in `src/content/`:
+
+| File | Contents |
+|---|---|
+| `site.json` | Company name, email, social links, logos, navigation, header/footer labels |
+| `hero.json` | Headline and hero image |
+| `about.json` | About heading, paragraphs, stats and image |
+| `services.json` | Services heading, intro, background image and service cards |
+| `insights.json` | Insights section heading and labels (the posts themselves come from LinkedIn, see below) |
+| `contact.json` | Contact heading, form labels/placeholders and contact details text |
+| `images/` | Every image the site uses. Reference them from the JSON by path relative to this folder, e.g. `"football.webp"` or `"logo/mark.png"` |
+
+Icons are referenced by name (e.g. `"target"`); the available names are listed in `src/content/index.ts`, where new [lucide](https://lucide.dev/icons) icons can be registered. A missing image or unknown icon name fails loudly with an error naming the file.
+
 ## Configuration
 
 Build-time variables (read via `import.meta.env`):

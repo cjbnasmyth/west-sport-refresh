@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { gsap, SplitText, useGSAP } from "@/lib/gsap";
-import footballImage from "@/assets/football.webp";
+import { hero } from "@/content";
 
 const Hero = () => {
   const root = useRef<HTMLElement>(null);
@@ -153,7 +153,7 @@ const Hero = () => {
             data-anim="headline"
             className="text-6xl md:text-7xl lg:text-8xl font-serif font-bold text-foreground mb-16 text-center leading-tight [perspective:600px]"
           >
-            Unparalleled Advice.
+            {hero.headline}
           </h1>
 
           {/* Laptop Mockup Section */}
@@ -182,11 +182,11 @@ const Hero = () => {
                   <div data-anim="screen" className="relative bg-black rounded-lg overflow-hidden aspect-[16/10]">
                     <img
                       data-anim="screen-img"
-                      src={footballImage}
-                      alt="Sports action in stadium"
+                      src={hero.image.src}
+                      alt={hero.image.alt}
                       className="w-full h-full object-cover"
-                      width={1440}
-                      height={960}
+                      width={hero.image.width}
+                      height={hero.image.height}
                       fetchPriority="high"
                     />
                     {/* Glare that follows the cursor */}

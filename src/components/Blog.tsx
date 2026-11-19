@@ -1,6 +1,6 @@
 import { ArrowUpRight, Play } from "lucide-react";
 import posts from "@/data/linkedin-posts.json";
-import { LINKEDIN_URL } from "@/lib/site";
+import { insights, site } from "@/content";
 
 // Posts are snapshotted from LinkedIn at build time by scripts/fetch-linkedin-posts.mjs.
 type Post = {
@@ -13,8 +13,6 @@ type Post = {
   image: string | null;
   date: string;
 };
-
-const TYPE_LABEL = { article: "Article", video: "Video", post: "Post" } as const;
 
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" });
@@ -38,11 +36,11 @@ const PostCard = ({ post }: { post: Post }) => (
         />
       ) : (
         <div className="grid h-full place-items-center">
-          <img src={`${import.meta.env.BASE_URL}logo/mark.png`} alt="" className="w-16 opacity-90" />
+          <img src={site.logos.mark} alt="" className="w-16 opacity-90" />
         </div>
       )}
       <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-navy backdrop-blur-sm">
-        {TYPE_LABEL[post.type]}
+        {insights.typeLabels[post.type]}
       </span>
       {post.type === "video" && (
         <span className="absolute inset-0 grid place-items-center">
@@ -61,7 +59,7 @@ const PostCard = ({ post }: { post: Post }) => (
       <h3 className="mb-3 line-clamp-3 text-xl font-bold leading-snug text-foreground">{post.title}</h3>
       {post.excerpt && <p className="mb-6 line-clamp-3 text-sm leading-relaxed text-muted-foreground">{post.excerpt}</p>}
       <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-coral-deep">
-        Read on LinkedIn
+        {insights.readMoreLabel}
         <ArrowUpRight
           aria-hidden="true"
           className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -77,21 +75,21 @@ const Blog = () => {
     <section id="blog" className="py-20 lg:py-32 bg-secondary/40">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <p data-reveal="up" className="text-sm uppercase tracking-[0.3em] text-muted-foreground mb-3">Insights</p>
+          <p data-reveal="up" className="text-sm uppercase tracking-[0.3em] text-muted-foreground mb-3">{insights.eyebrow}</p>
           <h2 data-reveal="heading" className="text-4xl md:text-5xl font-serif font-bold text-foreground leading-tight">
-            Direct from LinkedIn
+            {insights.title}
           </h2>
           <p data-reveal="up" className="text-lg text-muted-foreground mt-4">
-            Perspectives on sports media, rights and sponsorship, shared by our team on LinkedIn.
+            {insights.intro}
           </p>
           <div data-reveal="up">
             <a
               className="pill-button mt-8 inline-flex items-center gap-2"
-              href={LINKEDIN_URL}
+              href={site.social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
             >
-              Follow on LinkedIn
+              {insights.followLabel}
               <span aria-hidden="true">↗</span>
             </a>
           </div>

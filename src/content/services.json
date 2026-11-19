@@ -1,0 +1,27 @@
+{
+  "title": "What We Offer",
+  "intro": "Comprehensive sports marketing solutions tailored to your unique goals",
+  "backgroundImage": "football.webp",
+  "items": [
+    {
+      "icon": "target",
+      "title": "Strategic Marketing",
+      "description": "Data-driven marketing strategies that position your sports brand for maximum impact and reach."
+    },
+    {
+      "icon": "handshake",
+      "title": "Sponsorship Activation",
+      "description": "Turn sponsorship deals into powerful brand experiences that deliver measurable ROI."
+    },
+    {
+      "icon": "trending-up",
+      "title": "Sales Consulting",
+      "description": "Proven sales methodologies that close deals and build lasting partnerships in the sports industry."
+    },
+    {
+      "icon": "megaphone",
+      "title": "Brand Development",
+      "description": "Create compelling brand narratives that resonate with fans and stakeholders alike."
+    }
+  ]
+}

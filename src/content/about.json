@@ -1,0 +1,17 @@
+{
+  "title": "Your Partner in",
+  "titleAccent": "Sports Success",
+  "paragraphs": [
+    "With over a decade of experience in sports marketing and sponsorship activation, 26 West Sport specializes in creating strategic partnerships that deliver results.",
+    "We understand the unique challenges of the sports industry and provide tailored solutions that maximize your brand's potential, whether you're an athlete, team, or corporate partner looking to make an impact."
+  ],
+  "stats": [
+    { "icon": "award", "value": 15, "suffix": "+", "label": "Years Experience" },
+    { "icon": "users", "value": 100, "suffix": "+", "label": "Successful Partnerships" },
+    { "icon": "zap", "value": 500, "suffix": "M+", "label": "In Revenue Generated" }
+  ],
+  "image": {
+    "src": "surfer.webp",
+    "alt": "Sports excellence in action"
+  }
+}

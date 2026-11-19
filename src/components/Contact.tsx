@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail } from "lucide-react";
-import { EMAIL } from "@/lib/site";
+import { contact, site } from "@/content";
 
 const Contact = () => {
   return (
@@ -11,10 +11,10 @@ const Contact = () => {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <h2 data-reveal="heading" className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Let's Connect
+              {contact.title}
             </h2>
             <p data-reveal="up" className="text-xl text-muted-foreground">
-              Ready to take your sports brand to the next level? Get in touch today.
+              {contact.intro}
             </p>
           </div>
 
@@ -24,34 +24,34 @@ const Contact = () => {
               <form className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2 text-foreground">
-                    Name
+                    {contact.form.name.label}
                   </label>
                   <Input 
                     id="name" 
-                    placeholder="Your name" 
+                    placeholder={contact.form.name.placeholder}
                     className="w-full"
                   />
                 </div>
                 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-2 text-foreground">
-                    Email
+                    {contact.form.email.label}
                   </label>
                   <Input 
                     id="email" 
                     type="email" 
-                    placeholder="your@email.com" 
+                    placeholder={contact.form.email.placeholder}
                     className="w-full"
                   />
                 </div>
                 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium mb-2 text-foreground">
-                    Message
+                    {contact.form.message.label}
                   </label>
                   <Textarea 
                     id="message" 
-                    placeholder="Tell us about your project..." 
+                    placeholder={contact.form.message.placeholder}
                     rows={5}
                     className="w-full"
                   />
@@ -62,7 +62,7 @@ const Contact = () => {
                   className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
                   size="lg"
                 >
-                  Send Message
+                  {contact.form.submit}
                 </Button>
               </form>
             </div>
@@ -71,12 +71,10 @@ const Contact = () => {
             <div data-reveal="right" className="space-y-8">
               <div>
                 <h3 className="text-2xl font-bold text-foreground mb-6">
-                  Get in Touch
+                  {contact.details.title}
                 </h3>
                 <p className="text-muted-foreground mb-8 leading-relaxed">
-                  Whether you're looking to elevate your sports marketing strategy, 
-                  activate a sponsorship, or explore new partnership opportunities, 
-                  we're here to help you succeed.
+                  {contact.details.body}
                 </p>
               </div>
 
@@ -86,9 +84,9 @@ const Contact = () => {
                     <Mail className="h-6 w-6 text-accent" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-1">Email</h4>
-                    <a href={`mailto:${EMAIL}`} className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
-                      {EMAIL}
+                    <h4 className="font-semibold text-foreground mb-1">{contact.details.emailLabel}</h4>
+                    <a href={`mailto:${site.email}`} className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+                      {site.email}
                     </a>
                   </div>
                 </div>

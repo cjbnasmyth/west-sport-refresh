@@ -2,10 +2,9 @@ import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { ArrowRight, Linkedin, Mail } from "lucide-react";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
-import { CONTACT_LINK, EMAIL, LINKEDIN_URL, NAV_LINKS } from "@/lib/site";
+import { site } from "@/content";
 
-const BASE = import.meta.env.BASE_URL;
-const menuLinks = [...NAV_LINKS, CONTACT_LINK];
+const menuLinks = [...site.nav, site.contactLink];
 const TRACKED_SECTIONS = ["about", "services", "blog", "contact"];
 
 const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -237,7 +236,7 @@ const Navbar = () => {
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-navy focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
       >
-        Skip to content
+        {site.header.skipLink}
       </a>
 
       <header
@@ -260,19 +259,19 @@ const Navbar = () => {
             data-anim="nav-logo"
             href="#home"
             onClick={onNavClick}
-            aria-label="26 West Sport, back to top"
+            aria-label={`${site.name}, back to top`}
             className={cn("relative flex h-11 items-center rounded-full", focusRing)}
           >
             <span className="flex items-center gap-2.5 pl-1 transition duration-300 motion-reduce:transition-none group-data-[menu=open]/header:-translate-x-1.5 group-data-[scrolled=true]/header:-translate-x-1.5 group-data-[menu=open]/header:opacity-0 group-data-[scrolled=true]/header:opacity-0">
-              <img src={`${BASE}logo/mark.png`} alt="" className="h-7 w-auto md:h-8" />
-              <img src={`${BASE}logo/wordmark-navy.png`} alt="" className="h-7 w-auto md:h-8" />
+              <img src={site.logos.mark} alt="" className="h-7 w-auto md:h-8" />
+              <img src={site.logos.wordmarkNavy} alt="" className="h-7 w-auto md:h-8" />
             </span>
             <span className="absolute inset-y-0 left-0 flex scale-90 items-center gap-2.5 opacity-0 transition duration-300 motion-reduce:transition-none group-data-[menu=open]/header:scale-100 group-data-[scrolled=true]/header:scale-100 group-data-[menu=open]/header:opacity-100 group-data-[scrolled=true]/header:opacity-100">
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-navy">
-                <img src={`${BASE}logo/mark.png`} alt="" className="w-7" />
+                <img src={site.logos.mark} alt="" className="w-7" />
               </span>
-              <img src={`${BASE}logo/word-navy.png`} alt="" className="hidden h-4 w-auto sm:block group-data-[menu=open]/header:!hidden" />
-              <img src={`${BASE}logo/word-white.png`} alt="" className="hidden h-4 w-auto group-data-[menu=open]/header:block" />
+              <img src={site.logos.wordNavy} alt="" className="hidden h-4 w-auto sm:block group-data-[menu=open]/header:!hidden" />
+              <img src={site.logos.wordWhite} alt="" className="hidden h-4 w-auto group-data-[menu=open]/header:block" />
             </span>
           </a>
 
@@ -284,7 +283,7 @@ const Navbar = () => {
               className="pointer-events-none invisible absolute left-0 top-1/2 -mt-[18px] h-9 rounded-full bg-navy/[0.07] opacity-0"
             />
             <ul className="flex items-center">
-              {NAV_LINKS.map((link) => (
+              {site.nav.map((link) => (
                 <li key={link.href} data-anim="nav-item">
                   <a
                     href={link.href}
@@ -319,7 +318,7 @@ const Navbar = () => {
                   focusRing,
                 )}
               >
-                Let's talk
+                {site.header.cta}
                 <span className="cta-arrow grid h-8 w-8 place-items-center rounded-full bg-white text-navy transition-transform duration-300 group-hover/cta:scale-[1.08] motion-reduce:transition-none">
                   <ArrowRight aria-hidden="true" className="h-4 w-4" />
                   <ArrowRight aria-hidden="true" className="h-4 w-4" />
@@ -398,21 +397,21 @@ const Navbar = () => {
             onClick={(e) => onMenuLinkClick(e, "#contact")}
             className="inline-flex h-12 items-center gap-3 rounded-full bg-coral-deep pl-6 pr-2 font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
           >
-            Let's talk
+            {site.header.cta}
             <span className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy">
               <ArrowRight aria-hidden="true" className="h-4 w-4" />
             </span>
           </a>
           <div data-menu-extra className="flex items-center justify-between border-t border-white/15 pt-6 text-sm text-white/70">
-            <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2 hover:text-white">
+            <a href={`mailto:${site.email}`} className="inline-flex items-center gap-2 hover:text-white">
               <Mail aria-hidden="true" className="h-4 w-4" />
-              {EMAIL}
+              {site.email}
             </a>
             <a
-              href={LINKEDIN_URL}
+              href={site.social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="26 West Sport on LinkedIn"
+              aria-label={`${site.name} on LinkedIn`}
               className="grid h-10 w-10 place-items-center rounded-full border border-white/20 hover:text-white"
             >
               <Linkedin aria-hidden="true" className="h-4 w-4" />
