@@ -1,7 +1,7 @@
 {
   "title": "What We Offer",
   "intro": "Comprehensive sports marketing solutions tailored to your unique goals",
-  "backgroundImage": "football.webp",
+  "backgroundImage": "/images/football.webp",
   "items": [
     {
       "icon": "target",

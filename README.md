@@ -25,9 +25,11 @@ All site copy and imagery lives in `src/content/`:
 | `services.json` | Services heading, intro, background image and service cards |
 | `insights.json` | Insights section heading and labels (the posts themselves come from LinkedIn, see below) |
 | `contact.json` | Contact heading, form labels/placeholders and contact details text |
-| `images/` | Every image the site uses. Reference them from the JSON by path relative to this folder, e.g. `"football.webp"` or `"logo/mark.png"` |
+| `images/` | Every image the site uses. Reference them from the JSON as `/images/<path>`, e.g. `"/images/football.webp"` or `"/images/logo/mark.png"` |
 
-Icons are referenced by name (e.g. `"target"`); the available names are listed in `src/content/index.ts`, where new [lucide](https://lucide.dev/icons) icons can be registered. A missing image or unknown icon name fails loudly with an error naming the file.
+Icons are referenced by name (e.g. `"target"`); the available names are listed in `src/content/index.ts`, where new [lucide](https://lucide.dev/icons) icons can be registered (also add them to the icon lists in `.pages.yml`). A missing image or unknown icon name fails loudly with an error naming the file.
+
+The content can also be edited in the browser with [Pages CMS](https://app.pagescms.org), configured by `.pages.yml`. Uploaded images go to `src/content/images`, and every save commits to `main`, which redeploys the site.
 
 ## Configuration
 

@@ -16,13 +16,15 @@ const imageUrls = Object.fromEntries(
   ).map(([path, url]) => [path.replace("./images/", ""), url]),
 );
 
+// Accepts "/images/foo.webp" (the form Pages CMS writes, see .pages.yml) or plain "foo.webp".
 export const image = (name: string) => {
-  const url = imageUrls[name];
+  const url = imageUrls[name.replace(/^\/?(images\/)?/, "")];
   if (!url) throw new Error(`Content image "${name}" not found in src/content/images`);
   return url;
 };
 
-// Icons referenced by name in the JSON. Add new lucide icons here to make them available.
+// Icons referenced by name in the JSON. Add new lucide icons here to make them available, and add the
+// name to both icon select lists in .pages.yml so editors can pick it.
 const icons: Record<string, LucideIcon> = {
   award: Award,
   handshake: Handshake,

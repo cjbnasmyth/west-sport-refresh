@@ -6,11 +6,11 @@
     "x": "https://x.com/MurrayBarnett"
   },
   "logos": {
-    "mark": "logo/mark.png",
-    "wordmarkNavy": "logo/wordmark-navy.png",
-    "wordmarkWhite": "logo/wordmark-white.png",
-    "wordNavy": "logo/word-navy.png",
-    "wordWhite": "logo/word-white.png"
+    "mark": "/images/logo/mark.png",
+    "wordmarkNavy": "/images/logo/wordmark-navy.png",
+    "wordmarkWhite": "/images/logo/wordmark-white.png",
+    "wordNavy": "/images/logo/word-navy.png",
+    "wordWhite": "/images/logo/word-white.png"
   },
   "nav": [
     { "name": "About", "href": "#about" },

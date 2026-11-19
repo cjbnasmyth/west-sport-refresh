@@ -11,7 +11,7 @@
     { "icon": "zap", "value": 500, "suffix": "M+", "label": "In Revenue Generated" }
   ],
   "image": {
-    "src": "surfer.webp",
+    "src": "/images/surfer.webp",
     "alt": "Sports excellence in action"
   }
 }
