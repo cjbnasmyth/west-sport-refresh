@@ -1,27 +1,27 @@
 {
-  "title": "What We Offer",
-  "intro": "Comprehensive sports marketing solutions tailored to your unique goals",
-  "backgroundImage": "/images/pexels-abed-ismail-6697875.jpg",
+  "title": "What We Provide",
+  "intro": "Comprehensive, tailored solutions for each client",
+  "backgroundImage": "/images/pexels-domleroy-3991976.jpg",
   "items": [
     {
       "icon": "target",
       "title": "Media Rights",
-      "description": "Expert advice, support and sales across Football, Rugby, Motorsport, US Sports, Tennis, Golf and Cricket"
+      "description": "Expert advice, support and sales across Football, Rugby, Motorsport, US Sports, Tennis, Golf and Cricket."
     },
     {
       "icon": "handshake",
       "title": "Sports Sponsorship",
-      "description": "Delivering successful sponsorship strategies for righstowners and brands"
+      "description": "Successful, impactful sponsorship strategies for righstowners and brands."
     },
     {
       "icon": "trending-up",
-      "title": "Sales Consulting",
-      "description": "Proven sales methodologies that close deals and build lasting partnerships in the sports industry."
+      "title": "Commercial Consulting",
+      "description": "Identifying commercial opportunities and building compelling narratives."
     },
     {
       "icon": "megaphone",
-      "title": "Commercial Development",
-      "description": "Identifying commercial opportunities and building compelling narratives. "
+      "title": "Events",
+      "description": "Consulting on sports event tenders, better event commercial optimisation and building new sports properties."
     }
   ]
 }
