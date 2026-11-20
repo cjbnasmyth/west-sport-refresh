@@ -1,6 +1,6 @@
 {
-  "name": "26 West Sport",
-  "email": "info@26westsport.com",
+  "name": "26West Sport",
+  "email": "murray.barnett@26westsport.com",
   "social": {
     "linkedin": "https://www.linkedin.com/in/murray-barnett-7721723/",
     "x": "https://x.com/MurrayBarnett"
@@ -13,11 +13,23 @@
     "wordWhite": "/images/logo/word-white.png"
   },
   "nav": [
-    { "name": "About", "href": "#about" },
-    { "name": "Services", "href": "#services" },
-    { "name": "Insights", "href": "#blog" }
+    {
+      "name": "About",
+      "href": "#about"
+    },
+    {
+      "name": "Services",
+      "href": "#services"
+    },
+    {
+      "name": "Insights",
+      "href": "#blog"
+    }
   ],
-  "contactLink": { "name": "Contact", "href": "#contact" },
+  "contactLink": {
+    "name": "Contact",
+    "href": "#contact"
+  },
   "header": {
     "skipLink": "Skip to content",
     "cta": "Let's talk"
