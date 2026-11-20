@@ -198,6 +198,9 @@ content:
           - name: cta
             label: Button label
             type: string
+          - name: compactName
+            label: Name shown next to the logo once you scroll
+            type: string
       - name: footer
         label: Footer
         type: object

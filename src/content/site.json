@@ -43,7 +43,8 @@
   },
   "header": {
     "skipLink": "Skip to content",
-    "cta": "Let's talk"
+    "cta": "Let's talk",
+    "compactName": "26WestSport"
   },
   "footer": {
     "backToTop": "Back to top",
