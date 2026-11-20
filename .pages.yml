@@ -137,9 +137,10 @@ content:
             label: LinkedIn URL
             type: string
             description: Can be overridden at build time by VITE_LINKEDIN_PROFILE_URL.
-          - name: x
-            label: X URL
+          - name: threads
+            label: Threads URL
             type: string
+            description: e.g. https://www.threads.com/@yourhandle. Leave empty to hide the Threads icon.
       - name: logos
         label: Logos
         type: object
