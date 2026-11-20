@@ -23,7 +23,7 @@ All site copy and imagery lives in `src/content/`:
 | `hero.json` | Headline and hero image |
 | `about.json` | About heading, paragraphs, stats and image |
 | `services.json` | Services heading, intro, background image and service cards |
-| `bio.json` | Bio heading, paragraphs and photo (the section after Services) |
+| `bio.json` | Bio heading, subtitle, paragraphs and square photo (the section after Services) |
 | `insights.json` | Insights section heading and labels (the posts themselves come from LinkedIn, see below) |
 | `contact.json` | Contact heading, form labels/placeholders and contact details text |
 | `articles.json` | Text around the articles: homepage section, all-articles page, article page and 404 page |

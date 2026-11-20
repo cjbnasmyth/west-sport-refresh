@@ -329,6 +329,9 @@ content:
       - name: title
         label: Heading
         type: string
+      - name: intro
+        label: Subtitle
+        type: text
       - name: paragraphs
         label: Paragraphs
         type: text
@@ -341,7 +344,7 @@ content:
             label: Photo
             type: image
             required: true
-            description: Shown on the left, cropped to a portrait shape (4:5).
+            description: Shown as a square on the left. Upload a square photo of at least 800×800 pixels; other shapes are cropped.
           - name: alt
             label: Photo description (for screen readers)
             type: string
