@@ -1,10 +1,19 @@
 {
   "title": "Let's Connect",
-  "intro": "Ready to take your sports brand to the next level? Get in touch today.",
+  "intro": "Allow us to help you deliver outstanding sports commercial results",
   "form": {
-    "name": { "label": "Name", "placeholder": "Your name" },
-    "email": { "label": "Email", "placeholder": "your@email.com" },
-    "message": { "label": "Message", "placeholder": "Tell us about your project..." },
+    "name": {
+      "label": "Name",
+      "placeholder": "Your name"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "your@email.com"
+    },
+    "message": {
+      "label": "Message",
+      "placeholder": "Tell us about your project..."
+    },
     "submit": "Send Message"
   },
   "details": {
