@@ -38,7 +38,7 @@ const Footer = () => {
             className={cn("flex items-center gap-2.5 self-start rounded-full lg:self-auto", focusRing)}
           >
             <img src={site.logos.mark} alt="" className="h-7 w-auto" />
-            <img src={site.logos.wordNavy} alt="" className="h-4 w-auto" />
+            <img src={site.logos.wordSportNavy} alt="" className="h-5 w-auto" />
           </a>
 
           <nav aria-label="Footer">
