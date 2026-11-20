@@ -8,7 +8,7 @@ cover: /images/football.webp
 coverAlt: Describe the cover image for screen readers
 author: Murray Barnett
 ---
-This example is a **draft**, so it never appears on the site. Duplicate it or use it as a guide, then delete it whenever you like.
+This example is a **draft**, so it never appears on the site. Duplicate it or use it as a guide, then delete it whenever you like. For accessing the toolbar you highlight the word/text that you want to apply something to ie stuff it says under formatting. You should just be able to paste from Word/Docs and it retains everything.
 
 ## Formatting
 
