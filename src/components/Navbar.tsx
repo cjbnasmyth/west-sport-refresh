@@ -3,9 +3,10 @@ import { ArrowRight, Linkedin, Mail } from "lucide-react";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 import { site } from "@/content";
+import { useSectionHref } from "@/lib/links";
 
 const menuLinks = [...site.nav, site.contactLink];
-const TRACKED_SECTIONS = ["about", "services", "blog", "contact"];
+const TRACKED_SECTIONS = ["about", "services", "articles", "blog", "contact"];
 
 const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const scrollToHash = (hash: string) =>
@@ -15,6 +16,7 @@ const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const sectionHref = useSectionHref();
   const [active, setActive] = useState<string | null>(null);
 
   const headerRef = useRef<HTMLElement>(null);
@@ -186,7 +188,9 @@ const Navbar = () => {
     gsap.set(overlayRef.current, { clearProps: "clipPath" });
     const hash = pendingHash.current;
     pendingHash.current = null;
-    if (hash) scrollToHash(hash);
+    // Section links scroll on the homepage; on other pages they load the homepage at that section.
+    if (hash && document.querySelector(hash)) scrollToHash(hash);
+    else if (hash) window.location.assign(sectionHref(hash));
     else toggleRef.current?.focus();
   }
 
@@ -257,7 +261,7 @@ const Navbar = () => {
           {/* Logo: full lockup at the top of the page, compact mark once scrolled (or over the menu) */}
           <a
             data-anim="nav-logo"
-            href="#home"
+            href={sectionHref("#home")}
             onClick={onNavClick}
             aria-label={`${site.name}, back to top`}
             className={cn("relative flex h-11 items-center rounded-full", focusRing)}
@@ -286,7 +290,7 @@ const Navbar = () => {
               {site.nav.map((link) => (
                 <li key={link.href} data-anim="nav-item">
                   <a
-                    href={link.href}
+                    href={sectionHref(link.href)}
                     onClick={onNavClick}
                     aria-current={active === link.href.slice(1) ? "location" : undefined}
                     className={cn(
@@ -309,7 +313,7 @@ const Navbar = () => {
             <div data-anim="nav-item" className="hidden md:block">
               <a
                 ref={ctaRef}
-                href="#contact"
+                href={sectionHref("#contact")}
                 onClick={onNavClick}
                 aria-current={active === "contact" ? "location" : undefined}
                 className={cn(
@@ -330,7 +334,7 @@ const Navbar = () => {
                 CTA's own CSS opacity transition mid-flight and settle at 0. */}
             <div data-anim="nav-item" className="md:hidden">
               <a
-                href="#contact"
+                href={sectionHref("#contact")}
                 onClick={onNavClick}
                 aria-label="Contact us"
                 className={cn(
@@ -376,7 +380,7 @@ const Navbar = () => {
           {menuLinks.map((link, i) => (
             <li key={link.href} className="overflow-hidden">
               <a
-                href={link.href}
+                href={sectionHref(link.href)}
                 onClick={(e) => onMenuLinkClick(e, link.href)}
                 aria-current={active === link.href.slice(1) ? "location" : undefined}
                 className="block rounded-lg py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral"
@@ -393,7 +397,7 @@ const Navbar = () => {
         <div className="mt-auto space-y-8 pt-12">
           <a
             data-menu-extra
-            href="#contact"
+            href={sectionHref("#contact")}
             onClick={(e) => onMenuLinkClick(e, "#contact")}
             className="inline-flex h-12 items-center gap-3 rounded-full bg-coral-deep pl-6 pr-2 font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
           >

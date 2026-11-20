@@ -1,6 +1,7 @@
 import { ArrowUpRight, Play } from "lucide-react";
 import posts from "@/data/linkedin-posts.json";
 import { insights, site } from "@/content";
+import { formatDate } from "@/lib/format";
 
 // Posts are snapshotted from LinkedIn at build time by scripts/fetch-linkedin-posts.mjs.
 type Post = {
@@ -13,9 +14,6 @@ type Post = {
   image: string | null;
   date: string;
 };
-
-const formatDate = (iso: string) =>
-  new Date(iso).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" });
 
 const PostCard = ({ post }: { post: Post }) => (
   <a

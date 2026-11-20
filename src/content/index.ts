@@ -8,6 +8,8 @@ import aboutJson from "./about.json";
 import servicesJson from "./services.json";
 import insightsJson from "./insights.json";
 import contactJson from "./contact.json";
+import articlesJson from "./articles.json";
+import { articles as articleList } from "virtual:articles";
 
 // Bundled (and hashed) URLs for everything in ./images, keyed by path relative to that folder.
 const imageUrls = Object.fromEntries(
@@ -43,8 +45,14 @@ const icon = (name: string | undefined, fallback: LucideIcon) => {
   return Icon;
 };
 
+// Published articles (drafts and future-dated ones are filtered out at build time), newest first.
+export const articles = articleList.map((a) => ({ ...a, cover: a.cover ? image(a.cover) : null }));
+export type Article = (typeof articles)[number];
+
 export const site = {
   ...siteJson,
+  // The Articles link only appears once there is something to read.
+  nav: siteJson.nav.filter((link) => link.href !== "#articles" || articles.length > 0),
   social: {
     ...siteJson.social,
     linkedin: import.meta.env.VITE_LINKEDIN_PROFILE_URL || siteJson.social.linkedin,
@@ -71,3 +79,4 @@ export const services = {
 
 export const insights = insightsJson;
 export const contact = contactJson;
+export const articlesCopy = articlesJson;

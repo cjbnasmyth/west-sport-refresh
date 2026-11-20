@@ -8,6 +8,101 @@ media:
   categories: [image]
 
 content:
+  - name: articles
+    label: Articles
+    description: Turn Draft off to publish. A future date schedules the article for that day.
+    type: collection
+    path: src/content/articles
+    format: yaml-frontmatter
+    # The part after the date becomes the article's address: /articles/<title>/
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date, draft]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Publish date
+        type: date
+        required: true
+      - name: draft
+        label: Draft (hidden from the site)
+        type: boolean
+      - name: excerpt
+        label: Summary
+        type: text
+        description: One or two sentences, shown on article cards, under the headline and in link previews.
+      - name: cover
+        label: Cover image
+        type: image
+        options:
+          path: src/content/images/articles
+      - name: coverAlt
+        label: Cover image description (for screen readers)
+        type: string
+      - name: author
+        label: Author
+        type: string
+      - name: body
+        label: Article
+        type: rich-text
+        options:
+          format: markdown
+          path: src/content/images/articles
+
+  - name: articles-page
+    label: Articles page text
+    type: file
+    path: src/content/articles.json
+    format: json
+    fields:
+      - name: eyebrow
+        label: Homepage section eyebrow
+        type: string
+      - name: title
+        label: Homepage section heading
+        type: string
+      - name: intro
+        label: Homepage section intro
+        type: text
+      - name: viewAllLabel
+        label: View all button label
+        type: string
+      - name: readMoreLabel
+        label: Card link label
+        type: string
+      - name: readingTimeLabel
+        label: Reading time label (after the number)
+        type: string
+      - name: index
+        label: All articles page
+        type: object
+        fields:
+          - { name: title, label: Heading, type: string }
+          - { name: intro, label: Intro, type: text }
+          - { name: empty, label: Message when there are no articles, type: string }
+      - name: article
+        label: Article page
+        type: object
+        fields:
+          - { name: backLabel, label: Back link label, type: string }
+          - { name: previousLabel, label: Previous article label, type: string }
+          - { name: nextLabel, label: Next article label, type: string }
+      - name: notFound
+        label: Page not found
+        type: object
+        fields:
+          - { name: title, label: Heading, type: string }
+          - { name: body, label: Text, type: text }
+          - { name: homeLabel, label: Button label, type: string }
+
   - name: site
     label: Site settings
     type: file
@@ -18,6 +113,18 @@ content:
         label: Company name
         type: string
         required: true
+      - name: url
+        label: Website address
+        type: string
+        readonly: true
+        description: Used for search engines and link previews.
+      - name: title
+        label: Browser tab title (homepage)
+        type: string
+        required: true
+      - name: description
+        label: Search result description (homepage)
+        type: text
       - name: email
         label: Contact email
         type: string
@@ -56,7 +163,7 @@ content:
       - name: nav
         label: Navigation links
         type: object
-        description: Each link must point at a section on the page (#about, #services or #blog).
+        description: Each link points at a section of the homepage. The Articles link only shows once an article is published.
         list:
           collapsible:
             summary: "{name}"
@@ -69,7 +176,7 @@ content:
             label: Section
             type: select
             options:
-              values: ["#about", "#services", "#blog", "#contact"]
+              values: ["#about", "#services", "#articles", "#blog", "#contact"]
       - name: contactLink
         label: Contact link
         type: object

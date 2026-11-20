@@ -1,5 +1,8 @@
 {
   "name": "26West Sport",
+  "url": "https://26westsport.com",
+  "title": "26 West Sport | Sports Commercial Experts",
+  "description": "Expert sports marketing, sponsorship activation, and sales consulting services. Transform athletic partnerships into winning collaborations.",
   "email": "murray.barnett@26westsport.com",
   "social": {
     "linkedin": "https://www.linkedin.com/in/murray-barnett-7721723/",
@@ -20,6 +23,10 @@
     {
       "name": "Services",
       "href": "#services"
+    },
+    {
+      "name": "Articles",
+      "href": "#articles"
     },
     {
       "name": "Insights",

@@ -126,6 +126,17 @@ All colors MUST be HSL.
     text-align: center;
     line-height: 1.05;
   }
+
+  /* Pages are pre-rendered, so the hero would paint fully before its scripts load and then jump to the
+     start of the intro. With JS on (index.html adds .js) and motion allowed, hide the animated pieces
+     until GSAP takes over; it sets their visibility inline when the intro starts. */
+  @media (prefers-reduced-motion: no-preference) {
+    .js #home [data-anim="headline"],
+    .js #home [data-anim="laptop"],
+    .js #home [data-anim="block"] {
+      visibility: hidden;
+    }
+  }
 }
 
 @layer components {

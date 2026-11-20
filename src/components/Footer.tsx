@@ -1,6 +1,7 @@
 import { ArrowUp, Linkedin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { site } from "@/content";
+import { useSectionHref } from "@/lib/links";
 
 const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral-deep focus-visible:ring-offset-2";
 
@@ -24,12 +25,14 @@ const backToTop = () => {
 };
 
 const Footer = () => {
+  const sectionHref = useSectionHref();
+
   return (
     <footer className="border-t border-navy/10 bg-background">
       <div className="container mx-auto px-4 py-12 lg:px-8">
         <div data-reveal="stagger" className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
           <a
-            href="#home"
+            href={sectionHref("#home")}
             aria-label={`${site.name}, back to top`}
             className={cn("flex items-center gap-2.5 self-start rounded-full lg:self-auto", focusRing)}
           >
@@ -42,7 +45,7 @@ const Footer = () => {
               {[...site.nav, site.contactLink].map((link) => (
                 <li key={link.href}>
                   <a
-                    href={link.href}
+                    href={sectionHref(link.href)}
                     className={cn(
                       "block rounded-full px-3 py-2.5 text-sm font-semibold tracking-[0.02em] text-navy transition-colors duration-200 hover:bg-navy/[0.04]",
                       focusRing,

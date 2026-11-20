@@ -25,11 +25,11 @@ const Hero = () => {
           const tilt = q("[data-anim=tilt]")[0];
           const blocks = q("[data-anim=block]");
 
-          // --- Intro: hide before first paint, play once the headline font is ready ---
+          // --- Intro: hidden by CSS until now (see index.css), plays once the headline font is ready ---
           gsap.set(headline, { visibility: "hidden" });
           gsap.set(q("[data-anim=laptop]"), { autoAlpha: 0, y: 120 });
           gsap.set(q("[data-anim=screen]"), { clipPath: "inset(50% 0% 50% 0%)" });
-          gsap.set(blocks, { scale: 0, rotation: -30 });
+          gsap.set(blocks, { scale: 0, rotation: -30, visibility: "visible" });
 
           let cancelled = false;
           document.fonts.ready.then(() => {
@@ -187,7 +187,7 @@ const Hero = () => {
                       className="w-full h-full object-cover"
                       width={hero.image.width}
                       height={hero.image.height}
-                      fetchPriority="high"
+                      {...{ fetchpriority: "high" }}
                     />
                     {/* Glare that follows the cursor */}
                     <div

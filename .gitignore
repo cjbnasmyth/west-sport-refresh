@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# vite-react-ssg build scratch
+.vite-react-ssg-temp

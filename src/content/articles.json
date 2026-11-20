@@ -1,0 +1,23 @@
+{
+  "eyebrow": "Articles",
+  "title": "Latest Thinking",
+  "intro": "Analysis and commentary on media rights, sponsorship and the business of sport.",
+  "viewAllLabel": "View all articles",
+  "readMoreLabel": "Read article",
+  "readingTimeLabel": "min read",
+  "index": {
+    "title": "Articles",
+    "intro": "Analysis and commentary on media rights, sponsorship and the business of sport.",
+    "empty": "No articles published yet. Check back soon."
+  },
+  "article": {
+    "backLabel": "All articles",
+    "previousLabel": "Previous article",
+    "nextLabel": "Next article"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you were looking for doesn't exist or has moved.",
+    "homeLabel": "Back to the homepage"
+  }
+}
