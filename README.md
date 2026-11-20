@@ -54,7 +54,7 @@ The article body in Markdown.
 
 - The address comes from the filename without the date: `/articles/why-rights-holders-need-better-data/`. Renaming the file changes the URL.
 - `draft: true` keeps an article off the site entirely. A future `date` schedules it: it goes live on the first build on or after that date (the daily rebuild handles this).
-- The homepage shows the three newest articles; `/articles/` lists them all. The Articles section and menu link only appear once at least one article is published.
+- The homepage shows the three newest articles; `/articles/` lists them all. Until the first article is published, both show the "no articles yet" message from `articles.json`.
 - `scripts/vite-plugin-articles.mjs` parses and renders the Markdown at build time, so it never reaches the browser, and bundles any `/images/...` it references. `scripts/articles.mjs` holds the rules shared with the sitemap and RSS feed.
 
 ## Configuration

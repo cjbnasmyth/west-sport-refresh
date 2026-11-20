@@ -51,8 +51,6 @@ export type Article = (typeof articles)[number];
 
 export const site = {
   ...siteJson,
-  // The Articles link only appears once there is something to read.
-  nav: siteJson.nav.filter((link) => link.href !== "#articles" || articles.length > 0),
   social: {
     ...siteJson.social,
     linkedin: import.meta.env.VITE_LINKEDIN_PROFILE_URL || siteJson.social.linkedin,

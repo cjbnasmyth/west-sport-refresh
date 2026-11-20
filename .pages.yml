@@ -87,7 +87,7 @@ content:
         fields:
           - { name: title, label: Heading, type: string }
           - { name: intro, label: Intro, type: text }
-          - { name: empty, label: Message when there are no articles, type: string }
+          - { name: empty, label: Message when there are no articles (here and on the homepage), type: string }
       - name: article
         label: Article page
         type: object
@@ -163,7 +163,7 @@ content:
       - name: nav
         label: Navigation links
         type: object
-        description: Each link points at a section of the homepage. The Articles link only shows once an article is published.
+        description: Each link points at a section of the homepage.
         list:
           collapsible:
             summary: "{name}"
