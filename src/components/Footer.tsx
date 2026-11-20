@@ -95,13 +95,18 @@ const Footer = () => {
 
         <div
           data-reveal="up"
-          className="mt-10 flex items-center justify-between gap-4 border-t border-navy/10 pt-6 text-sm text-muted-foreground"
+          // Three columns so the company details sit exactly in the centre; stacked on small screens.
+          className="mt-10 grid items-center gap-2 border-t border-navy/10 pt-6 text-sm text-muted-foreground md:grid-cols-[1fr_auto_1fr] md:gap-4"
         >
           <p>&copy; {new Date().getFullYear()} {site.name}</p>
+          <p className="md:text-center">{site.footer.companyDetails}</p>
           <button
             type="button"
             onClick={backToTop}
-            className={cn("group inline-flex items-center gap-2 rounded-full py-2 font-medium transition-colors hover:text-navy", focusRing)}
+            className={cn(
+              "group inline-flex items-center gap-2 justify-self-start rounded-full py-2 font-medium transition-colors hover:text-navy md:justify-self-end",
+              focusRing,
+            )}
           >
             {site.footer.backToTop}
             <ArrowUp

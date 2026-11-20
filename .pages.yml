@@ -205,6 +205,9 @@ content:
           - name: backToTop
             label: Back to top label
             type: string
+          - name: companyDetails
+            label: Company details (centred at the bottom)
+            type: string
 
   - name: hero
     label: Hero
