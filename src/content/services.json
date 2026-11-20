@@ -5,7 +5,7 @@
   "items": [
     {
       "icon": "target",
-      "title": "Media Rights",
+      "title": "Sports Media Rights",
       "description": "Expert advice, support and sales across Football, Rugby, Motorsport, US Sports, Tennis, Golf and Cricket."
     },
     {
@@ -20,7 +20,7 @@
     },
     {
       "icon": "megaphone",
-      "title": "Events",
+      "title": "Sports Events",
       "description": "Consulting on sports event tenders, better event commercial optimisation and building new sports properties."
     }
   ]
