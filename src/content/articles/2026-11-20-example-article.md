@@ -1,11 +1,12 @@
 ---
 title: Example article (draft template)
 date: 2026-11-20
-excerpt: A short summary of the article. It appears on the article cards, under the headline and in search results and link previews.
+draft: false
+excerpt: A short summary of the article. It appears on the article cards, under
+  the headline and in search results and link previews.
 cover: /images/football.webp
 coverAlt: Describe the cover image for screen readers
 author: Murray Barnett
-draft: true
 ---
 This example is a **draft**, so it never appears on the site. Duplicate it or use it as a guide, then delete it whenever you like.
 
@@ -24,3 +25,4 @@ Images added in the editor are uploaded to the site and shown full width within 
 
 - Turn **Draft** off to publish. The site rebuilds automatically in about a minute.
 - A **date** in the future schedules the article: it goes live on the first daily rebuild on or after that date.
+
