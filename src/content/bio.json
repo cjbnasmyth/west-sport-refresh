@@ -1,0 +1,10 @@
+{
+  "title": "Bio",
+  "paragraphs": [
+    "Placeholder bio text. Replace this in Pages CMS (Bio) with a short introduction: background, experience and what you bring to clients."
+  ],
+  "image": {
+    "src": "/images/surfer.webp",
+    "alt": "Placeholder image; replace with a portrait in Pages CMS"
+  }
+}

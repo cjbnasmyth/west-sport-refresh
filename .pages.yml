@@ -176,7 +176,7 @@ content:
             label: Section
             type: select
             options:
-              values: ["#about", "#services", "#articles", "#blog", "#contact"]
+              values: ["#about", "#services", "#bio", "#articles", "#blog", "#contact"]
       - name: contactLink
         label: Contact link
         type: object
@@ -319,6 +319,32 @@ content:
           - name: description
             label: Description
             type: text
+
+  - name: bio
+    label: Bio
+    type: file
+    path: src/content/bio.json
+    format: json
+    fields:
+      - name: title
+        label: Heading
+        type: string
+      - name: paragraphs
+        label: Paragraphs
+        type: text
+        list: true
+      - name: image
+        label: Photo
+        type: object
+        fields:
+          - name: src
+            label: Photo
+            type: image
+            required: true
+            description: Shown on the left, cropped to a portrait shape (4:5).
+          - name: alt
+            label: Photo description (for screen readers)
+            type: string
 
   - name: insights
     label: Insights

@@ -6,7 +6,7 @@ import { site } from "@/content";
 import { useSectionHref } from "@/lib/links";
 
 const menuLinks = [...site.nav, site.contactLink];
-const TRACKED_SECTIONS = ["about", "services", "articles", "blog", "contact"];
+const TRACKED_SECTIONS = ["about", "services", "bio", "articles", "blog", "contact"];
 
 const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const scrollToHash = (hash: string) =>
@@ -209,7 +209,7 @@ const Navbar = () => {
     openMenu();
 
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setIsOpen(false);
-    const desktop = window.matchMedia("(min-width: 768px)");
+    const desktop = window.matchMedia("(min-width: 1024px)");
     const onBreakpoint = (e: MediaQueryListEvent) => e.matches && setIsOpen(false);
     document.addEventListener("keydown", onKey);
     desktop.addEventListener("change", onBreakpoint);
@@ -280,7 +280,7 @@ const Navbar = () => {
           </a>
 
           {/* Desktop links + sliding active highlight */}
-          <div ref={linksRef} className="relative hidden items-center md:flex">
+          <div ref={linksRef} className="relative hidden items-center lg:flex">
             <span
               ref={indicatorRef}
               aria-hidden="true"
@@ -310,7 +310,7 @@ const Navbar = () => {
 
           <div className="flex items-center gap-1.5">
             {/* Desktop CTA */}
-            <div data-anim="nav-item" className="hidden md:block">
+            <div data-anim="nav-item" className="hidden lg:block">
               <a
                 ref={ctaRef}
                 href={sectionHref("#contact")}
@@ -332,7 +332,7 @@ const Navbar = () => {
 
             {/* Mobile: compact CTA + menu toggle. The intro animates the wrapper because GSAP would read the
                 CTA's own CSS opacity transition mid-flight and settle at 0. */}
-            <div data-anim="nav-item" className="md:hidden">
+            <div data-anim="nav-item" className="lg:hidden">
               <a
                 href={sectionHref("#contact")}
                 onClick={onNavClick}
@@ -354,7 +354,7 @@ const Navbar = () => {
               aria-label={isOpen ? "Close menu" : "Open menu"}
               onClick={() => setIsOpen((open) => !open)}
               className={cn(
-                "group/toggle grid h-11 w-11 place-items-center rounded-full text-navy transition-colors md:hidden group-data-[menu=open]/header:text-white",
+                "group/toggle grid h-11 w-11 place-items-center rounded-full text-navy transition-colors lg:hidden group-data-[menu=open]/header:text-white",
                 focusRing,
               )}
             >
@@ -374,7 +374,7 @@ const Navbar = () => {
         role="dialog"
         aria-modal="true"
         aria-label="Site menu"
-        className="invisible fixed inset-0 z-40 flex flex-col overflow-y-auto bg-navy px-6 pb-10 pt-28 text-white opacity-0 md:hidden"
+        className="invisible fixed inset-0 z-40 flex flex-col overflow-y-auto bg-navy px-6 pb-10 pt-28 text-white opacity-0 lg:hidden"
       >
         <ol className="space-y-1">
           {menuLinks.map((link, i) => (

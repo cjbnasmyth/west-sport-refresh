@@ -9,6 +9,7 @@ import servicesJson from "./services.json";
 import insightsJson from "./insights.json";
 import contactJson from "./contact.json";
 import articlesJson from "./articles.json";
+import bioJson from "./bio.json";
 import { articles as articleList } from "virtual:articles";
 
 // Bundled (and hashed) URLs for everything in ./images, keyed by path relative to that folder.
@@ -74,6 +75,8 @@ export const services = {
   backgroundImage: image(servicesJson.backgroundImage),
   items: servicesJson.items.map((s) => ({ ...s, icon: icon(s.icon, Target) })),
 };
+
+export const bio = { ...bioJson, image: { ...bioJson.image, src: image(bioJson.image.src) } };
 
 export const insights = insightsJson;
 export const contact = contactJson;
