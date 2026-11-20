@@ -1,17 +1,17 @@
 {
   "title": "What We Offer",
   "intro": "Comprehensive sports marketing solutions tailored to your unique goals",
-  "backgroundImage": "/images/football.webp",
+  "backgroundImage": "/images/pexels-abed-ismail-6697875.jpg",
   "items": [
     {
       "icon": "target",
-      "title": "Strategic Marketing",
-      "description": "Data-driven marketing strategies that position your sports brand for maximum impact and reach."
+      "title": "Media Rights",
+      "description": "Expert advice, support and sales across Football, Rugby, Motorsport, US Sports, Tennis, Golf and Cricket"
     },
     {
       "icon": "handshake",
-      "title": "Sponsorship Activation",
-      "description": "Turn sponsorship deals into powerful brand experiences that deliver measurable ROI."
+      "title": "Sports Sponsorship",
+      "description": "Delivering successful sponsorship strategies for righstowners and brands"
     },
     {
       "icon": "trending-up",
@@ -20,8 +20,8 @@
     },
     {
       "icon": "megaphone",
-      "title": "Brand Development",
-      "description": "Create compelling brand narratives that resonate with fans and stakeholders alike."
+      "title": "Commercial Development",
+      "description": "Identifying commercial opportunities and building compelling narratives. "
     }
   ]
 }
