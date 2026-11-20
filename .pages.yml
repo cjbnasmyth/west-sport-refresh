@@ -161,6 +161,12 @@ content:
           - name: wordWhite
             label: Word (white)
             type: image
+          - name: wordSportNavy
+            label: One-line name (navy, scrolled header)
+            type: image
+          - name: wordSportWhite
+            label: One-line name (white, mobile menu)
+            type: image
       - name: nav
         label: Navigation links
         type: object
@@ -197,9 +203,6 @@ content:
             type: string
           - name: cta
             label: Button label
-            type: string
-          - name: compactName
-            label: Name shown next to the logo once you scroll
             type: string
       - name: footer
         label: Footer

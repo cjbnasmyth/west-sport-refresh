@@ -274,12 +274,8 @@ const Navbar = () => {
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-navy">
                 <img src={site.logos.mark} alt="" className="w-7" />
               </span>
-              <span
-                aria-hidden="true"
-                className="hidden text-lg font-bold tracking-tight text-navy sm:block group-data-[menu=open]/header:block group-data-[menu=open]/header:text-white"
-              >
-                {site.header.compactName}
-              </span>
+              <img src={site.logos.wordSportNavy} alt="" className="hidden h-5 w-auto sm:block group-data-[menu=open]/header:!hidden" />
+              <img src={site.logos.wordSportWhite} alt="" className="hidden h-5 w-auto group-data-[menu=open]/header:block" />
             </span>
           </a>
 

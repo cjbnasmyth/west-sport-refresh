@@ -13,7 +13,9 @@
     "wordmarkNavy": "/images/logo/wordmark-navy.png",
     "wordmarkWhite": "/images/logo/wordmark-white.png",
     "wordNavy": "/images/logo/word-navy.png",
-    "wordWhite": "/images/logo/word-white.png"
+    "wordWhite": "/images/logo/word-white.png",
+    "wordSportNavy": "/images/logo/word-sport-navy.png",
+    "wordSportWhite": "/images/logo/word-sport-white.png"
   },
   "nav": [
     {
@@ -43,8 +45,7 @@
   },
   "header": {
     "skipLink": "Skip to content",
-    "cta": "Let's talk",
-    "compactName": "26WestSport"
+    "cta": "Let's talk"
   },
   "footer": {
     "backToTop": "Back to top",
