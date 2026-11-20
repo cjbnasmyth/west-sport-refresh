@@ -5,6 +5,7 @@ import PageHead from "@/components/PageHead";
 import PageShell from "@/components/PageShell";
 import { articles, articlesCopy } from "@/content";
 import { formatDate } from "@/lib/format";
+import { articlePath } from "@/lib/links";
 
 // Runs at build time; the browser gets the result from the pre-rendered page (or vite-react-ssg's
 // data manifest when navigating client-side), so the Markdown never reaches the client.
@@ -74,7 +75,7 @@ const ArticlePage = () => {
           {(newer || older) && (
             <nav aria-label="More articles" className="mx-auto mt-16 grid max-w-3xl gap-4 border-t border-border pt-8 sm:grid-cols-2">
               {older ? (
-                <Link to={`/articles/${older.slug}/`} className="group rounded-xl p-4 transition-colors hover:bg-secondary">
+                <Link to={articlePath(older.slug)} className="group rounded-xl p-4 transition-colors hover:bg-secondary">
                   <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">
                     <ArrowLeft aria-hidden="true" className="h-3.5 w-3.5" />
                     {articlesCopy.article.previousLabel}
@@ -86,7 +87,7 @@ const ArticlePage = () => {
               )}
               {newer && (
                 <Link
-                  to={`/articles/${newer.slug}/`}
+                  to={articlePath(newer.slug)}
                   className="group rounded-xl p-4 text-right transition-colors hover:bg-secondary"
                 >
                   <span className="flex items-center justify-end gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">
