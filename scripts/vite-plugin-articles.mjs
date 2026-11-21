@@ -17,6 +17,8 @@ const stripScripts = (html) =>
 
 // Turn image references into imported (hashed) asset URLs: src="/images/foo.webp" from the editor,
 // matching how JSON content images work, and src="docx-image:<file>" for images from a Word document.
+// Photos get the same resized WebP srcset as content photos (see photo() in src/content/index.ts);
+// SVGs and GIFs are used as they are.
 const IMAGE_SRC = new RegExp(`src="(?:\\/?images\\/|${DOCX_IMAGE_PREFIX})([^"]+)"`, "g");
 
 function articleModule(html) {
@@ -27,9 +29,20 @@ function articleModule(html) {
   for (const match of clean.matchAll(IMAGE_SRC)) {
     const [whole, file] = match;
     const dir = whole.includes(DOCX_IMAGE_PREFIX) ? DOCX_IMAGES_DIR : IMAGES_DIR;
+    const path = resolve(dir, decodeURIComponent(file));
     const name = `img${imports.length}`;
-    imports.push(`import ${name} from ${JSON.stringify(resolve(dir, decodeURIComponent(file)))};`);
-    pieces.push(JSON.stringify(clean.slice(last, match.index)), `'src="' + ${name} + '"'`);
+    pieces.push(JSON.stringify(clean.slice(last, match.index)));
+    if (/\.(svg|gif)$/i.test(path)) {
+      imports.push(`import ${name} from ${JSON.stringify(path)};`);
+      pieces.push(`'src="' + ${name} + '"'`);
+    } else {
+      imports.push(
+        `import ${name} from ${JSON.stringify(`${path}?w=1200&format=webp&quality=80`)};`,
+        `import ${name}set from ${JSON.stringify(`${path}?w=400;800;1200;1600&format=webp&quality=80&as=srcset`)};`,
+      );
+      // The article column is max-w-3xl (768px).
+      pieces.push(`'src="' + ${name} + '" srcset="' + ${name}set + '" sizes="(min-width: 768px) 768px, 100vw"'`);
+    }
     last = match.index + whole.length;
   }
   pieces.push(JSON.stringify(clean.slice(last)));

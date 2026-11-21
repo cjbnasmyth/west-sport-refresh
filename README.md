@@ -28,6 +28,8 @@ All site copy and imagery lives in `src/content/`:
 | `articles/` | One Markdown file per article (see below) |
 | `images/` | Every image the site uses. Reference them from the JSON as `/images/<path>`, e.g. `"/images/football.webp"` or `"/images/logo/mark.png"` |
 
+Photos are optimised at build time by [vite-imagetools](https://github.com/JonasKruckenberg/imagetools) (sharp): each one is resized to 400–2000px wide WebP versions at quality 80, never enlarged past the original, and pages use `srcset`/`sizes` so each browser downloads the smallest version that's still sharp for its screen (see `photo()` in `src/content/index.ts`; inline article images get the same treatment in `scripts/vite-plugin-articles.mjs`). The originals in `images/` are untouched, and logos are served as-is. Pages CMS still can't upload files over about 3 MB, so shrink very large photos before uploading or add them through GitHub.
+
 Icons are referenced by name (e.g. `"target"`); the available names are listed in `src/content/index.ts`, where new [lucide](https://lucide.dev/icons) icons can be registered (also add them to the icon lists in `.pages.yml`). A missing image or unknown icon name fails loudly with an error naming the file.
 
 The content can also be edited in the browser with [Pages CMS](https://app.pagescms.org), configured by `.pages.yml`. Uploaded images go to `src/content/images`, and every save commits to `main`, which redeploys the site.

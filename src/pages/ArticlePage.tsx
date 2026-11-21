@@ -31,7 +31,7 @@ const ArticlePage = () => {
         title={article.title}
         description={article.excerpt || undefined}
         path={`/articles/${article.slug}/`}
-        image={article.cover}
+        image={article.cover?.src}
         type="article"
       />
       <article className="pt-36 pb-20 lg:pt-44 lg:pb-32">
@@ -58,7 +58,9 @@ const ArticlePage = () => {
           {article.cover && (
             <div className="mx-auto mt-12 max-w-5xl overflow-hidden rounded-2xl shadow-xl">
               <img
-                src={article.cover}
+                src={article.cover.src}
+                srcSet={article.cover.srcset}
+                sizes="(min-width: 1100px) 1024px, 100vw"
                 alt={article.coverAlt}
                 className="aspect-[16/9] w-full object-cover"
                 {...{ fetchpriority: "high" }}

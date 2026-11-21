@@ -23,6 +23,8 @@ const Bio = () => {
             <div data-reveal="image" className="w-full aspect-square rounded-2xl overflow-hidden shadow-2xl">
               <img
                 src={bio.image.src}
+                srcSet={bio.image.srcset}
+                sizes="320px"
                 alt={bio.image.alt}
                 className="w-full h-full object-cover object-[center_25%]"
                 width={640}

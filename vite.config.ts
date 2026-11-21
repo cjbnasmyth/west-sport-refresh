@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import { imagetools } from "vite-imagetools";
 import articles from "./scripts/vite-plugin-articles.mjs";
 // Adds the `ssgOptions` key to Vite's config type.
 import type {} from "vite-react-ssg";
@@ -13,7 +14,8 @@ export default defineConfig({
     host: "::",
     port: 8080,
   },
-  plugins: [react(), articles()],
+  // imagetools resizes photos at build time; see photo() in src/content/index.ts.
+  plugins: [react(), imagetools(), articles()],
   // Pre-bundle the router up front: if the dev server discovers it late and re-optimises, the page can
   // end up with two copies of react-router and lose its router context.
   optimizeDeps: {

@@ -6,7 +6,9 @@ const Services = () => {
     <section id="services" className="py-20 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0 opacity-5">
         <img 
-          src={services.backgroundImage}
+          src={services.backgroundImage.src}
+          srcSet={services.backgroundImage.srcset}
+          sizes="100vw"
           alt="" 
           className="w-full h-full object-cover"
           loading="lazy"

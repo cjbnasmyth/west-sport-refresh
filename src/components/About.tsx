@@ -42,6 +42,8 @@ const About = () => {
             <div data-reveal="image" className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
               <img 
                 src={about.image.src}
+                srcSet={about.image.srcset}
+                sizes="(min-width: 1024px) 640px, 100vw"
                 alt={about.image.alt}
                 className="w-full h-full object-cover"
                 loading="lazy"

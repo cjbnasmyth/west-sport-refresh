@@ -183,6 +183,9 @@ const Hero = () => {
                     <img
                       data-anim="screen-img"
                       src={hero.image.src}
+                      srcSet={hero.image.srcset}
+                      // Laptop screen: max-w-5xl minus the frame
+                      sizes="(min-width: 1024px) 1000px, 92vw"
                       alt={hero.image.alt}
                       className="w-full h-full object-cover"
                       width={hero.image.width}

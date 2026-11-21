@@ -13,7 +13,9 @@ const ArticleCard = ({ article }: { article: Article }) => (
     <div className="relative aspect-[16/9] overflow-hidden bg-navy">
       {article.cover ? (
         <img
-          src={article.cover}
+          src={article.cover.src}
+          srcSet={article.cover.srcset}
+          sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"
           alt=""
           loading="lazy"
           decoding="async"
