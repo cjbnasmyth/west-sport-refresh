@@ -54,6 +54,7 @@ The article body in Markdown.
 ```
 
 - The address comes from the filename without the date: `/articles/why-rights-holders-need-better-data/`. Renaming the file changes the URL.
+- Instead of writing in the editor, editors can upload a Word document (`document: /documents/<file>.docx`, stored in `src/content/documents/`). If one is attached it replaces the editor text: [mammoth](https://github.com/mwilliamson/mammoth.js) converts it at build time, with Word's Heading 1–3 styles becoming the article's section headings, Quote styles becoming pull quotes, and embedded images bundled like any other image. The document's Title paragraph is dropped (the CMS title is used), as are fonts, colours, text boxes and comments. The .docx itself is never published.
 - `draft: true` keeps an article off the site entirely. A future `date` schedules it: it goes live on the first build on or after that date (the daily rebuild handles this).
 - The homepage shows the three newest articles; `/articles/` lists them all. Until the first article is published, both show the "no articles yet" message from `articles.json`.
 - `scripts/vite-plugin-articles.mjs` parses and renders the Markdown at build time, so it never reaches the browser, and bundles any `/images/...` it references. `scripts/articles.mjs` holds the rules shared with the sitemap and RSS feed.

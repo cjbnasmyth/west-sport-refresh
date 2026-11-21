@@ -3,9 +3,17 @@
 # Edit this file in place (or via the Pages CMS settings page) to change the editor forms.
 
 media:
-  input: src/content/images
-  output: /images
-  categories: [image]
+  - name: images
+    label: Images
+    input: src/content/images
+    output: /images
+    categories: [image]
+  # Word documents attached to articles; converted to the article text at build time, never published.
+  - name: documents
+    label: Word documents
+    input: src/content/documents
+    output: /documents
+    extensions: [docx]
 
 content:
   - name: articles
@@ -43,6 +51,7 @@ content:
         label: Cover image
         type: image
         options:
+          media: images
           path: src/content/images/articles
       - name: coverAlt
         label: Cover image description (for screen readers)
@@ -50,10 +59,17 @@ content:
       - name: author
         label: Author
         type: string
+      - name: document
+        label: Word document (optional)
+        type: file
+        description: Upload a .docx to use as the article text instead of the editor below. Use Word's Heading styles for headings; images in the document are included.
+        options:
+          media: documents
       - name: body
         label: Article
         type: rich-text
         options:
+          media: images
           format: markdown
           path: src/content/images/articles
 
@@ -149,24 +165,38 @@ content:
           - name: mark
             label: Mark
             type: image
+            options:
+              media: images
           - name: wordmarkNavy
             label: Wordmark (navy)
             type: image
+            options:
+              media: images
           - name: wordmarkWhite
             label: Wordmark (white)
             type: image
+            options:
+              media: images
           - name: wordNavy
             label: Word (navy)
             type: image
+            options:
+              media: images
           - name: wordWhite
             label: Word (white)
             type: image
+            options:
+              media: images
           - name: wordSportNavy
             label: One-line name (navy, scrolled header)
             type: image
+            options:
+              media: images
           - name: wordSportWhite
             label: One-line name (white, mobile menu)
             type: image
+            options:
+              media: images
       - name: nav
         label: Navigation links
         type: object
@@ -232,6 +262,8 @@ content:
           - name: src
             label: Image
             type: image
+            options:
+              media: images
             required: true
           - name: alt
             label: Image description (for screen readers)
@@ -290,6 +322,8 @@ content:
           - name: src
             label: Image
             type: image
+            options:
+              media: images
             required: true
           - name: alt
             label: Image description (for screen readers)
@@ -310,6 +344,8 @@ content:
       - name: backgroundImage
         label: Background image
         type: image
+        options:
+          media: images
       - name: items
         label: Services
         type: object
@@ -353,6 +389,8 @@ content:
           - name: src
             label: Photo
             type: image
+            options:
+              media: images
             required: true
             description: Shown as a square on the left. Upload a square photo of at least 800×800 pixels; other shapes are cropped.
           - name: alt

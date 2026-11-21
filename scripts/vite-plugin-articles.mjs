@@ -1,10 +1,10 @@
-// Exposes the Markdown articles to the app as two kinds of virtual module, so YAML and Markdown are
-// parsed at build time and never shipped to the browser:
+// Exposes the articles to the app as two kinds of virtual module, so YAML, Markdown and Word documents
+// are converted at build time and never shipped to the browser:
 //
 //   virtual:articles        metadata for every published article (newest first) + a loader per slug
-//   virtual:article/<slug>  that article's rendered HTML, with /images/... references bundled as assets
+//   virtual:article/<slug>  that article's rendered HTML, with its images bundled as assets
 import { resolve } from "node:path";
-import { ARTICLES_DIR, loadArticles, renderMarkdown } from "./articles.mjs";
+import { ARTICLES_DIR, DOCUMENTS_DIR, DOCX_IMAGES_DIR, DOCX_IMAGE_PREFIX, loadArticles } from "./articles.mjs";
 
 const LIST_ID = "virtual:articles";
 const ITEM_PREFIX = "virtual:article/";
@@ -15,30 +15,54 @@ const IMAGES_DIR = resolve(ARTICLES_DIR, "../images");
 const stripScripts = (html) =>
   html.replace(/<script[\s\S]*?<\/script>/gi, "").replace(/\s+on[a-z]+\s*=\s*("[^"]*"|'[^']*')/gi, "");
 
-// Turn src="/images/foo.webp" into an imported (hashed) asset URL, matching how JSON content images work.
+// Turn image references into imported (hashed) asset URLs: src="/images/foo.webp" from the editor,
+// matching how JSON content images work, and src="docx-image:<file>" for images from a Word document.
+const IMAGE_SRC = new RegExp(`src="(?:\\/?images\\/|${DOCX_IMAGE_PREFIX})([^"]+)"`, "g");
+
 function articleModule(html) {
+  const clean = stripScripts(html);
   const imports = [];
-  const parts = stripScripts(html).split(/src="\/?images\/([^"]+)"/g);
-  const pieces = parts.map((part, i) => {
-    if (i % 2 === 0) return JSON.stringify(part);
+  const pieces = [];
+  let last = 0;
+  for (const match of clean.matchAll(IMAGE_SRC)) {
+    const [whole, file] = match;
+    const dir = whole.includes(DOCX_IMAGE_PREFIX) ? DOCX_IMAGES_DIR : IMAGES_DIR;
     const name = `img${imports.length}`;
-    imports.push(`import ${name} from ${JSON.stringify(resolve(IMAGES_DIR, decodeURIComponent(part)))};`);
-    return `'src="' + ${name} + '"'`;
-  });
+    imports.push(`import ${name} from ${JSON.stringify(resolve(dir, decodeURIComponent(file)))};`);
+    pieces.push(JSON.stringify(clean.slice(last, match.index)), `'src="' + ${name} + '"'`);
+    last = match.index + whole.length;
+  }
+  pieces.push(JSON.stringify(clean.slice(last)));
   return `${imports.join("\n")}\nexport const html = ${pieces.join(" + ")};\n`;
 }
 
 export default function articles() {
+  // One conversion per build (Word documents are slow to convert), shared by every module that needs it.
+  let cached = null;
+  const load = () => (cached ??= loadArticles());
+
   return {
     name: "articles",
+    buildStart() {
+      cached = null;
+    },
     resolveId(id) {
       if (id === LIST_ID || id.startsWith(ITEM_PREFIX)) return `\0${id}`;
     },
-    load(id) {
+    async load(id) {
       if (id === `\0${LIST_ID}`) {
         this.addWatchFile(ARTICLES_DIR);
-        const list = loadArticles();
-        const meta = list.map(({ body, published, ...rest }) => rest);
+        const list = await load();
+        const meta = list.map(({ slug, title, date, excerpt, cover, coverAlt, author, readingMinutes }) => ({
+          slug,
+          title,
+          date,
+          excerpt,
+          cover,
+          coverAlt,
+          author,
+          readingMinutes,
+        }));
         const loaders = list
           .map((a) => `  ${JSON.stringify(a.slug)}: () => import(${JSON.stringify(ITEM_PREFIX + a.slug)}),`)
           .join("\n");
@@ -46,16 +70,17 @@ export default function articles() {
       }
       if (id.startsWith(`\0${ITEM_PREFIX}`)) {
         const slug = id.slice(ITEM_PREFIX.length + 1);
-        const article = loadArticles().find((a) => a.slug === slug);
+        const article = (await load()).find((a) => a.slug === slug);
         if (!article) throw new Error(`[articles] no published article "${slug}"`);
-        return articleModule(renderMarkdown(article.body));
+        return articleModule(article.html);
       }
     },
-    // Dev server: reload when an article is added, edited or removed.
+    // Dev server: reload when an article or Word document is added, edited or removed.
     configureServer(server) {
-      server.watcher.add(ARTICLES_DIR);
+      server.watcher.add([ARTICLES_DIR, DOCUMENTS_DIR]);
       const onChange = (file) => {
-        if (!file.startsWith(ARTICLES_DIR)) return;
+        if (!file.startsWith(ARTICLES_DIR) && !file.startsWith(DOCUMENTS_DIR)) return;
+        cached = null;
         for (const mod of server.moduleGraph.idToModuleMap.values()) {
           if (mod.id?.startsWith(`\0${LIST_ID}`) || mod.id?.startsWith(`\0${ITEM_PREFIX}`)) {
             server.moduleGraph.invalidateModule(mod);
@@ -67,4 +92,3 @@ export default function articles() {
     },
   };
 }
-

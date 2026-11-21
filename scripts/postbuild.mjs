@@ -12,7 +12,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = resolve(root, "dist");
 const site = JSON.parse(readFileSync(resolve(root, "src/content/site.json"), "utf8"));
 const articlesCopy = JSON.parse(readFileSync(resolve(root, "src/content/articles.json"), "utf8"));
-const articles = loadArticles();
+const articles = await loadArticles();
 const abs = (path) => new URL(path, site.url).href;
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
