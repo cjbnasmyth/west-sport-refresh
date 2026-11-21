@@ -3,7 +3,9 @@
 //   - puts <meta charset> back at the top of every page (the per-page head tags are injected above it,
 //     and browsers only look for it in the first 1024 bytes)
 //   - writes dist/sitemap.xml and dist/rss.xml from the published articles
-import { readFileSync, readdirSync, renameSync, rmSync, writeFileSync } from "node:fs";
+//   - fails the build if any page links to an /assets/ file that doesn't exist, so a broken build is
+//     never deployed
+import { existsSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadArticles } from "./articles.mjs";
@@ -69,3 +71,16 @@ ${articles
 );
 
 console.log(`[postbuild] 404.html, sitemap.xml (${pages.length} URLs) and rss.xml (${articles.length} articles) written`);
+
+const missing = new Set();
+for (const file of readdirSync(dist, { recursive: true }).filter((f) => f.endsWith(".html"))) {
+  const html = readFileSync(resolve(dist, file), "utf8");
+  for (const [, path] of html.matchAll(/["\s,](\/assets\/[^"\s,]+)/g)) {
+    if (!existsSync(resolve(dist, `.${path}`))) missing.add(`${path} (in ${file})`);
+  }
+}
+if (missing.size) {
+  console.error(`[postbuild] ${missing.size} missing asset(s):\n  ${[...missing].join("\n  ")}`);
+  process.exit(1);
+}
+console.log("[postbuild] all asset references resolve");

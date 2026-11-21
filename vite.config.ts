@@ -26,6 +26,16 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // Name assets by content hash only. vite-react-ssg runs a client build (which writes the files)
+        // and a server build (which writes the HTML); with two identical source images, each build can
+        // pick a different file name for the shared output, leaving the HTML pointing at a missing file.
+        assetFileNames: "assets/[hash][extname]",
+      },
+    },
+  },
   // `vite-react-ssg build` pre-renders every route to its own index.html (see src/routes.tsx).
   ssgOptions: {
     entry: "src/main.tsx",
