@@ -1,7 +1,7 @@
 ---
 title: Example article (draft template)
 date: 2026-11-20
-draft: false
+draft: true
 excerpt: A short summary of the article. It appears on the article cards, under
   the headline and in search results and link previews.
 cover: /images/football.webp
