@@ -6,7 +6,6 @@ import siteJson from "./site.json";
 import heroJson from "./hero.json";
 import aboutJson from "./about.json";
 import servicesJson from "./services.json";
-import insightsJson from "./insights.json";
 import contactJson from "./contact.json";
 import articlesJson from "./articles.json";
 import bioJson from "./bio.json";
@@ -52,10 +51,6 @@ export type Article = (typeof articles)[number];
 
 export const site = {
   ...siteJson,
-  social: {
-    ...siteJson.social,
-    linkedin: import.meta.env.VITE_LINKEDIN_PROFILE_URL || siteJson.social.linkedin,
-  },
   logos: Object.fromEntries(Object.entries(siteJson.logos).map(([k, v]) => [k, image(v)])) as Record<
     keyof typeof siteJson.logos,
     string
@@ -78,6 +73,5 @@ export const services = {
 
 export const bio = { ...bioJson, image: { ...bioJson.image, src: image(bioJson.image.src) } };
 
-export const insights = insightsJson;
 export const contact = contactJson;
 export const articlesCopy = articlesJson;

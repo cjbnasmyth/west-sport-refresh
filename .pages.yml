@@ -152,7 +152,7 @@ content:
           - name: linkedin
             label: LinkedIn URL
             type: string
-            description: Can be overridden at build time by VITE_LINKEDIN_PROFILE_URL.
+            description: Used for the LinkedIn icon in the footer and mobile menu.
           - name: threads
             label: Threads URL
             type: string
@@ -213,7 +213,7 @@ content:
             label: Section
             type: select
             options:
-              values: ["#about", "#services", "#bio", "#articles", "#blog", "#contact"]
+              values: ["#about", "#services", "#bio", "#articles", "#contact"]
       - name: contactLink
         label: Contact link
         type: object
@@ -396,41 +396,17 @@ content:
           - name: alt
             label: Photo description (for screen readers)
             type: string
-
-  - name: insights
-    label: Insights
-    type: file
-    path: src/content/insights.json
-    format: json
-    fields:
-      - name: eyebrow
-        label: Eyebrow
-        type: string
-      - name: title
-        label: Heading
-        type: string
-      - name: intro
-        label: Intro
-        type: text
-      - name: followLabel
-        label: Follow button label
-        type: string
-      - name: readMoreLabel
-        label: Card link label
-        type: string
-      - name: typeLabels
-        label: Post type badges
+      - name: linkedin
+        label: LinkedIn button (under the photo)
         type: object
         fields:
-          - name: article
-            label: Article
+          - name: label
+            label: Button text
             type: string
-          - name: video
-            label: Video
+          - name: url
+            label: LinkedIn profile URL
             type: string
-          - name: post
-            label: Post
-            type: string
+            description: Leave empty to hide the button.
 
   - name: contact
     label: Contact

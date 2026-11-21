@@ -6,7 +6,7 @@ import { site } from "@/content";
 import { useSectionHref } from "@/lib/links";
 
 const menuLinks = [...site.nav, site.contactLink];
-const TRACKED_SECTIONS = ["about", "services", "bio", "articles", "blog", "contact"];
+const TRACKED_SECTIONS = ["about", "services", "bio", "articles", "contact"];
 
 const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const scrollToHash = (hash: string) =>

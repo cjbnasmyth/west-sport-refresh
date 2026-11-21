@@ -3,7 +3,6 @@ import Services from "@/components/Services";
 import About from "@/components/About";
 import Articles from "@/components/Articles";
 import Bio from "@/components/Bio";
-import Blog from "@/components/Blog";
 import Contact from "@/components/Contact";
 import PageHead from "@/components/PageHead";
 import PageShell from "@/components/PageShell";
@@ -16,7 +15,6 @@ const Index = () => (
     <Services />
     <Bio />
     <Articles />
-    <Blog />
     <Contact />
   </PageShell>
 );

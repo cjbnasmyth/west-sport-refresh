@@ -8,6 +8,10 @@
   ],
   "image": {
     "src": "/images/m033-1.jpg",
-    "alt": "Placeholder image; replace with a portrait in Pages CMS"
+    "alt": "Murray Barnett"
+  },
+  "linkedin": {
+    "label": "View LinkedIn profile",
+    "url": "https://www.linkedin.com/in/murray-barnett-7721723/"
   }
 }
