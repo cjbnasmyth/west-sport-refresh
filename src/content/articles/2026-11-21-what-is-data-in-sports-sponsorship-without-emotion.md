@@ -7,5 +7,5 @@ excerpt: Why sports sponsorship needs to stop counting logos and start
 cover: /images/articles/Emotion.jpg
 coverAlt: Emotion
 author: Murray Barnett
-document: /documents/Whats is data in sports sponsorship without emotion-1.docx
+document: /documents/Whats is data in sports sponsorship without emotion updated.docx
 ---
